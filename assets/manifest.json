@@ -1,0 +1,830 @@
+{
+ "stories": {
+  "yashoda-jinand": [
+   {
+    "src": "assets/weddings/yashoda-jinand/01.jpg",
+    "full": "assets/weddings/yashoda-jinand/01-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/yashoda-jinand/02.jpg",
+    "full": "assets/weddings/yashoda-jinand/02-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/yashoda-jinand/03.jpg",
+    "full": "assets/weddings/yashoda-jinand/03-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/yashoda-jinand/04.jpg",
+    "full": "assets/weddings/yashoda-jinand/04-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/yashoda-jinand/05.jpg",
+    "full": "assets/weddings/yashoda-jinand/05-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/yashoda-jinand/06.jpg",
+    "full": "assets/weddings/yashoda-jinand/06-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/yashoda-jinand/07.jpg",
+    "full": "assets/weddings/yashoda-jinand/07-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/yashoda-jinand/08.jpg",
+    "full": "assets/weddings/yashoda-jinand/08-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/yashoda-jinand/09.jpg",
+    "full": "assets/weddings/yashoda-jinand/09-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/yashoda-jinand/10.jpg",
+    "full": "assets/weddings/yashoda-jinand/10-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/yashoda-jinand/11.jpg",
+    "full": "assets/weddings/yashoda-jinand/11-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/yashoda-jinand/12.jpg",
+    "full": "assets/weddings/yashoda-jinand/12-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/yashoda-jinand/13.jpg",
+    "full": "assets/weddings/yashoda-jinand/13-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/yashoda-jinand/14.jpg",
+    "full": "assets/weddings/yashoda-jinand/14-lg.jpg",
+    "w": 720,
+    "h": 900
+   }
+  ],
+  "soham-sakshi": [
+   {
+    "src": "assets/weddings/soham-sakshi/01.jpg",
+    "full": "assets/weddings/soham-sakshi/01-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/soham-sakshi/02.jpg",
+    "full": "assets/weddings/soham-sakshi/02-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/soham-sakshi/03.jpg",
+    "full": "assets/weddings/soham-sakshi/03-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/soham-sakshi/04.jpg",
+    "full": "assets/weddings/soham-sakshi/04-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/soham-sakshi/05.jpg",
+    "full": "assets/weddings/soham-sakshi/05-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/soham-sakshi/06.jpg",
+    "full": "assets/weddings/soham-sakshi/06-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/soham-sakshi/07.jpg",
+    "full": "assets/weddings/soham-sakshi/07-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/soham-sakshi/08.jpg",
+    "full": "assets/weddings/soham-sakshi/08-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/soham-sakshi/09.jpg",
+    "full": "assets/weddings/soham-sakshi/09-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/soham-sakshi/10.jpg",
+    "full": "assets/weddings/soham-sakshi/10-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/soham-sakshi/11.jpg",
+    "full": "assets/weddings/soham-sakshi/11-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/soham-sakshi/12.jpg",
+    "full": "assets/weddings/soham-sakshi/12-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/soham-sakshi/13.jpg",
+    "full": "assets/weddings/soham-sakshi/13-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/soham-sakshi/14.jpg",
+    "full": "assets/weddings/soham-sakshi/14-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/soham-sakshi/15.jpg",
+    "full": "assets/weddings/soham-sakshi/15-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/soham-sakshi/16.jpg",
+    "full": "assets/weddings/soham-sakshi/16-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/soham-sakshi/17.jpg",
+    "full": "assets/weddings/soham-sakshi/17-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/soham-sakshi/18.jpg",
+    "full": "assets/weddings/soham-sakshi/18-lg.jpg",
+    "w": 720,
+    "h": 900
+   }
+  ],
+  "mruga-kunal": [
+   {
+    "src": "assets/weddings/mruga-kunal/01.jpg",
+    "full": "assets/weddings/mruga-kunal/01-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/mruga-kunal/02.jpg",
+    "full": "assets/weddings/mruga-kunal/02-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/mruga-kunal/03.jpg",
+    "full": "assets/weddings/mruga-kunal/03-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/mruga-kunal/04.jpg",
+    "full": "assets/weddings/mruga-kunal/04-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/mruga-kunal/05.jpg",
+    "full": "assets/weddings/mruga-kunal/05-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/mruga-kunal/06.jpg",
+    "full": "assets/weddings/mruga-kunal/06-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/mruga-kunal/07.jpg",
+    "full": "assets/weddings/mruga-kunal/07-lg.jpg",
+    "w": 720,
+    "h": 900
+   }
+  ],
+  "harshita-himij": [
+   {
+    "src": "assets/weddings/harshita-himij/01.jpg",
+    "full": "assets/weddings/harshita-himij/01-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/harshita-himij/02.jpg",
+    "full": "assets/weddings/harshita-himij/02-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/harshita-himij/03.jpg",
+    "full": "assets/weddings/harshita-himij/03-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/harshita-himij/04.jpg",
+    "full": "assets/weddings/harshita-himij/04-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/harshita-himij/05.jpg",
+    "full": "assets/weddings/harshita-himij/05-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/harshita-himij/06.jpg",
+    "full": "assets/weddings/harshita-himij/06-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/harshita-himij/07.jpg",
+    "full": "assets/weddings/harshita-himij/07-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/harshita-himij/08.jpg",
+    "full": "assets/weddings/harshita-himij/08-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/harshita-himij/09.jpg",
+    "full": "assets/weddings/harshita-himij/09-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/harshita-himij/10.jpg",
+    "full": "assets/weddings/harshita-himij/10-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/harshita-himij/11.jpg",
+    "full": "assets/weddings/harshita-himij/11-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/harshita-himij/12.jpg",
+    "full": "assets/weddings/harshita-himij/12-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/harshita-himij/13.jpg",
+    "full": "assets/weddings/harshita-himij/13-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/harshita-himij/14.jpg",
+    "full": "assets/weddings/harshita-himij/14-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/harshita-himij/15.jpg",
+    "full": "assets/weddings/harshita-himij/15-lg.jpg",
+    "w": 720,
+    "h": 900
+   }
+  ],
+  "manisha-francesco": [
+   {
+    "src": "assets/weddings/manisha-francesco/01.jpg",
+    "full": "assets/weddings/manisha-francesco/01-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/manisha-francesco/02.jpg",
+    "full": "assets/weddings/manisha-francesco/02-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/manisha-francesco/03.jpg",
+    "full": "assets/weddings/manisha-francesco/03-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/manisha-francesco/04.jpg",
+    "full": "assets/weddings/manisha-francesco/04-lg.jpg",
+    "w": 720,
+    "h": 900
+   },
+   {
+    "src": "assets/weddings/manisha-francesco/05.jpg",
+    "full": "assets/weddings/manisha-francesco/05-lg.jpg",
+    "w": 720,
+    "h": 900
+   }
+  ]
+ },
+ "portfolio": [
+  {
+   "src": "assets/portfolio/p01.jpg",
+   "full": "assets/portfolio/p01-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p02.jpg",
+   "full": "assets/portfolio/p02-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p03.jpg",
+   "full": "assets/portfolio/p03-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p04.jpg",
+   "full": "assets/portfolio/p04-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p05.jpg",
+   "full": "assets/portfolio/p05-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p06.jpg",
+   "full": "assets/portfolio/p06-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p07.jpg",
+   "full": "assets/portfolio/p07-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p08.jpg",
+   "full": "assets/portfolio/p08-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p09.jpg",
+   "full": "assets/portfolio/p09-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p10.jpg",
+   "full": "assets/portfolio/p10-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p11.jpg",
+   "full": "assets/portfolio/p11-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p12.jpg",
+   "full": "assets/portfolio/p12-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p13.jpg",
+   "full": "assets/portfolio/p13-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p14.jpg",
+   "full": "assets/portfolio/p14-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p15.jpg",
+   "full": "assets/portfolio/p15-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p16.jpg",
+   "full": "assets/portfolio/p16-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p17.jpg",
+   "full": "assets/portfolio/p17-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p18.jpg",
+   "full": "assets/portfolio/p18-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p19.jpg",
+   "full": "assets/portfolio/p19-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p20.jpg",
+   "full": "assets/portfolio/p20-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p21.jpg",
+   "full": "assets/portfolio/p21-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p22.jpg",
+   "full": "assets/portfolio/p22-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p23.jpg",
+   "full": "assets/portfolio/p23-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p24.jpg",
+   "full": "assets/portfolio/p24-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p25.jpg",
+   "full": "assets/portfolio/p25-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p26.jpg",
+   "full": "assets/portfolio/p26-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p27.jpg",
+   "full": "assets/portfolio/p27-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p28.jpg",
+   "full": "assets/portfolio/p28-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p29.jpg",
+   "full": "assets/portfolio/p29-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p30.jpg",
+   "full": "assets/portfolio/p30-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p31.jpg",
+   "full": "assets/portfolio/p31-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p32.jpg",
+   "full": "assets/portfolio/p32-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p33.jpg",
+   "full": "assets/portfolio/p33-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p34.jpg",
+   "full": "assets/portfolio/p34-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p35.jpg",
+   "full": "assets/portfolio/p35-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p36.jpg",
+   "full": "assets/portfolio/p36-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p37.jpg",
+   "full": "assets/portfolio/p37-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p38.jpg",
+   "full": "assets/portfolio/p38-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p39.jpg",
+   "full": "assets/portfolio/p39-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p40.jpg",
+   "full": "assets/portfolio/p40-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p41.jpg",
+   "full": "assets/portfolio/p41-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p42.jpg",
+   "full": "assets/portfolio/p42-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p43.jpg",
+   "full": "assets/portfolio/p43-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p44.jpg",
+   "full": "assets/portfolio/p44-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p45.jpg",
+   "full": "assets/portfolio/p45-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p46.jpg",
+   "full": "assets/portfolio/p46-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p47.jpg",
+   "full": "assets/portfolio/p47-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p48.jpg",
+   "full": "assets/portfolio/p48-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p49.jpg",
+   "full": "assets/portfolio/p49-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p50.jpg",
+   "full": "assets/portfolio/p50-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p51.jpg",
+   "full": "assets/portfolio/p51-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p52.jpg",
+   "full": "assets/portfolio/p52-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p53.jpg",
+   "full": "assets/portfolio/p53-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/portfolio/p54.jpg",
+   "full": "assets/portfolio/p54-lg.jpg",
+   "w": 720,
+   "h": 900
+  }
+ ],
+ "hero": [
+  {
+   "src": "assets/hero/h01.jpg",
+   "full": "assets/hero/h01-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/hero/h02.jpg",
+   "full": "assets/hero/h02-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/hero/h03.jpg",
+   "full": "assets/hero/h03-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/hero/h04.jpg",
+   "full": "assets/hero/h04-lg.jpg",
+   "w": 720,
+   "h": 900
+  }
+ ],
+ "about": [
+  {
+   "src": "assets/about/a01.jpg",
+   "full": "assets/about/a01-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/about/a02.jpg",
+   "full": "assets/about/a02-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/about/a03.jpg",
+   "full": "assets/about/a03-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/about/a04.jpg",
+   "full": "assets/about/a04-lg.jpg",
+   "w": 720,
+   "h": 900
+  }
+ ],
+ "contact": [
+  {
+   "src": "assets/about/c01.jpg",
+   "full": "assets/about/c01-lg.jpg",
+   "w": 720,
+   "h": 900
+  }
+ ],
+ "home": [
+  {
+   "src": "assets/home/e01.jpg",
+   "full": "assets/home/e01-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/home/e02.jpg",
+   "full": "assets/home/e02-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/home/e03.jpg",
+   "full": "assets/home/e03-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/home/e04.jpg",
+   "full": "assets/home/e04-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/home/e05.jpg",
+   "full": "assets/home/e05-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/home/e06.jpg",
+   "full": "assets/home/e06-lg.jpg",
+   "w": 720,
+   "h": 900
+  }
+ ],
+ "offer": [
+  {
+   "src": "assets/offer/o01.jpg",
+   "full": "assets/offer/o01-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/offer/o02.jpg",
+   "full": "assets/offer/o02-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/offer/o03.jpg",
+   "full": "assets/offer/o03-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/offer/o04.jpg",
+   "full": "assets/offer/o04-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/offer/o05.jpg",
+   "full": "assets/offer/o05-lg.jpg",
+   "w": 720,
+   "h": 900
+  },
+  {
+   "src": "assets/offer/o06.jpg",
+   "full": "assets/offer/o06-lg.jpg",
+   "w": 720,
+   "h": 900
+  }
+ ]
+}

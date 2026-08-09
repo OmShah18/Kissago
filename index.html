@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Kissago Art Co. — Wedding Photography</title>
+    <meta name="description" content="Kissago Art Co. is a wedding photography studio based in Pune, Maharashtra, photographing weddings, pre-weddings and engagements across India.">
+    <link rel="icon" type="image/png" href="assets/logo/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="inner-style.css">
+    <link rel="stylesheet" href="kissago.css">
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.13/dist/lenis.css">
+</head>
+
+<body>
+    <div class="preloader" id="preloader">
+        <div class="preloader-inner">
+            <div class="preloader-brand">
+                <span class="kg-logo"><img src="assets/logo/kissago-cream.png" alt="Kissago Art Co."></span>
+                <div class="preloader-tag">Wedding Photography</div>
+            </div>
+            <div class="preloader-progress">
+                <div class="preloader-track"><div class="preloader-fill" id="preloader-fill"></div></div>
+                <div class="preloader-counter" id="preloader-counter">0</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-transition" id="page-transition" style="transform:translateY(-100%);pointer-events:none;">
+        <a href="index.html" class="kg-logo " data-nav aria-label="Kissago Art Co. — home"><img src="assets/logo/kissago-cream.png" alt="Kissago Art Co."></a>
+    </div>
+
+    <div class="site-main-wrapper" id="site-main-wrapper">
+        <header class="header">
+            <a href="index.html" class="kg-logo " data-nav aria-label="Kissago Art Co. — home"><img src="assets/logo/kissago-cream.png" alt="Kissago Art Co."></a>
+            <div class="menu-btn" id="menu-open-btn" aria-label="Menu" role="button" tabindex="0">
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+        </header>
+
+        <div class="menu-overlay" id="menu-overlay">
+            <div class="menu-header">
+                <a href="index.html" class="kg-logo kg-logo-sm" data-nav aria-label="Kissago Art Co. — home"><img src="assets/logo/kissago-green.png" alt="Kissago Art Co."></a>
+                <div class="menu-header-right">
+                    <a href="contact.html" class="get-in-touch-btn" data-nav><span>GET IN TOUCH <span class="arrow">&rarr;</span></span></a>
+                    <div class="close-btn" id="close-btn" aria-label="Close" role="button" tabindex="0">
+                        <span class="line line-1"></span>
+                        <span class="line line-2"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-body">
+                <div class="menu-images">
+                    <img class="hover-img img-1 home-img" src="assets/home/e01.jpg" alt="" loading="lazy" decoding="async">
+                    <img class="hover-img img-2 home-img" src="assets/home/e03.jpg" alt="" loading="lazy" decoding="async">
+                    <img class="hover-img img-3 home-img" src="assets/home/e05.jpg" alt="" loading="lazy" decoding="async">
+                    <img class="hover-img img-1 weddings-img" src="assets/weddings/soham-sakshi/01.jpg" alt="" loading="lazy" decoding="async">
+                    <img class="hover-img img-2 weddings-img" src="assets/weddings/yashoda-jinand/01.jpg" alt="" loading="lazy" decoding="async">
+                    <img class="hover-img img-3 weddings-img" src="assets/weddings/harshita-himij/01.jpg" alt="" loading="lazy" decoding="async">
+                    <img class="hover-img img-1 portfolio-img" src="assets/portfolio/p03.jpg" alt="" loading="lazy" decoding="async">
+                    <img class="hover-img img-2 portfolio-img" src="assets/portfolio/p09.jpg" alt="" loading="lazy" decoding="async">
+                    <img class="hover-img img-3 portfolio-img" src="assets/portfolio/p16.jpg" alt="" loading="lazy" decoding="async">
+                    <img class="hover-img img-1 about-img" src="assets/about/a01.jpg" alt="" loading="lazy" decoding="async">
+                    <img class="hover-img img-2 about-img" src="assets/about/a02.jpg" alt="" loading="lazy" decoding="async">
+                    <img class="hover-img img-3 about-img" src="assets/about/a03.jpg" alt="" loading="lazy" decoding="async">
+                </div>
+
+                <nav class="menu-nav">
+                    <a href="index.html" class="menu-link" data-target="home" data-text="HOME" aria-label="Home"><span>HOME</span></a>
+                    <a href="weddings.html" class="menu-link" data-target="weddings" data-text="WEDDINGS" data-nav aria-label="Featured Weddings"><span>WEDDINGS</span></a>
+                    <a href="portfolio.html" class="menu-link" data-target="portfolio" data-text="PORTFOLIO" data-nav aria-label="Portfolio"><span>PORTFOLIO</span></a>
+                    <a href="about.html" class="menu-link" data-target="about" data-text="ABOUT" data-nav aria-label="About"><span>ABOUT</span></a>
+                </nav>
+            </div>
+
+            <div class="menu-footer">
+                <div class="connect-text">Pune, Maharashtra &middot; available worldwide</div>
+                <div class="social-links">
+                    <a href="https://instagram.com/" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="mailto:hello@kissago.art" class="social-icon" aria-label="Email">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 6L2 7"></path></svg>
+                    </a>
+                    <a href="https://wa.me/" class="social-icon" aria-label="WhatsApp" target="_blank" rel="noopener">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <main class="kg-hero">
+            <div class="kg-hero-wall">
+                <div class="kg-hero-pane"><img src="assets/hero/h01.jpg" alt="" fetchpriority="high" decoding="async"></div>
+                <div class="kg-hero-pane"><img src="assets/hero/h02.jpg" alt="" fetchpriority="high" decoding="async"></div>
+                <div class="kg-hero-pane"><img src="assets/hero/h03.jpg" alt="" fetchpriority="high" decoding="async"></div>
+                <div class="kg-hero-pane"><img src="assets/hero/h04.jpg" alt="" fetchpriority="high" decoding="async"></div>
+            </div>
+            <div class="kg-video-holder" data-video="QZ2c1hm1HWY" data-video-eager data-video-title="Kissago Art Co. showreel"></div>
+            <div class="kg-hero-content">
+                <h1 class="kg-hero-title">Kissago</h1>
+            </div>
+        </main>
+
+        <section class="kg-section" style="padding-bottom:4rem">
+            <div class="kg-intro">
+                <div data-reveal="up">
+                    <div class="kg-eyebrow">Who we are</div>
+                    <h2 class="kg-heading">Not posed.<br><em>Remembered.</em></h2>
+                    <p class="kg-body" style="margin-top:1.8rem">
+                        Kissago Art Co. is a small wedding photography studio. We shoot the way a wedding
+                        actually feels &mdash; warm, loud, a little chaotic, and over far too quickly.
+                        Our job is to stay out of the way, read the room, and be standing in the right
+                        place when something real happens.
+                    </p>
+                    <p class="kg-body" style="margin-top:1.2rem">
+                        Every set you see here was made for one family. No stock, no borrowed frames.
+                    </p>
+                    <div class="kg-signature">&mdash; kissago art co.</div>
+                    <a href="about.html" class="kg-btn kg-btn-dark" style="margin-top:2.4rem" data-nav>More about us</a>
+                </div>
+                <div class="kg-intro-figs" data-reveal="up" data-delay="0.15">
+                    <img src="assets/home/e01.jpg" alt="" loading="lazy" decoding="async">
+                    <img src="assets/home/e02.jpg" alt="" loading="lazy" decoding="async">
+                </div>
+            </div>
+        </section>
+
+        <section class="kg-section" style="padding-top:4rem">
+            <div class="kg-section-head">
+                <div>
+                    <div class="kg-eyebrow">Featured weddings</div>
+                    <h2 class="kg-heading">Stories, by name.</h2>
+                </div>
+                <a href="weddings.html" class="kg-btn kg-btn-dark" data-nav>See all weddings</a>
+            </div>
+            <div class="kg-stories">
+                <article class="kg-story" data-reveal="up">
+                    <div class="kg-story-media">
+                        <a class="kg-story-main" href="weddings/yashoda-jinand.html" data-nav><img src="assets/weddings/yashoda-jinand/01.jpg" alt="Yashoda &amp; Jinand" loading="lazy" decoding="async"></a>
+                        <a class="kg-story-alt" href="weddings/yashoda-jinand.html" data-nav><img src="assets/weddings/yashoda-jinand/02.jpg" alt="" loading="lazy" decoding="async"></a>
+                    </div>
+                    <div class="kg-story-body">
+                        <div class="kg-story-index">01 &mdash; PRE-WEDDING</div>
+                        <h3 class="kg-story-name">Yashoda &amp; Jinand</h3>
+                        <div class="kg-story-meta"><span>Pre-Wedding</span><span>Countryside Stables</span><span>Golden Hour</span></div>
+                        <p class="kg-story-text">A morning at the riding grounds, where the horses were as much a part of the story as the two of them. Dust in the light, warm brass sun through the trees, and a quiet ease between two people who had clearly been laughing all week.</p>
+                        <a href="weddings/yashoda-jinand.html" class="kg-btn kg-btn-dark" data-nav>View the story</a>
+                    </div>
+                </article>
+                <article class="kg-story" data-reveal="up">
+                    <div class="kg-story-media">
+                        <a class="kg-story-main" href="weddings/soham-sakshi.html" data-nav><img src="assets/weddings/soham-sakshi/01.jpg" alt="Soham &amp; Sakshi" loading="lazy" decoding="async"></a>
+                        <a class="kg-story-alt" href="weddings/soham-sakshi.html" data-nav><img src="assets/weddings/soham-sakshi/02.jpg" alt="" loading="lazy" decoding="async"></a>
+                    </div>
+                    <div class="kg-story-body">
+                        <div class="kg-story-index">02 &mdash; WEDDING</div>
+                        <h3 class="kg-story-name">Soham &amp; Sakshi</h3>
+                        <div class="kg-story-meta"><span>Wedding</span><span>Maharashtrian Ceremony</span><span>Marigold Mandap</span></div>
+                        <p class="kg-story-text">Rituals in full colour — the antarpat lowered, turmeric on skin, a wall of marigolds behind every vow. Sakshi in nauvari and green chuda, Soham grinning through every ceremony he was told to sit still for.</p>
+                        <a href="weddings/soham-sakshi.html" class="kg-btn kg-btn-dark" data-nav>View the story</a>
+                    </div>
+                </article>
+                <article class="kg-story" data-reveal="up">
+                    <div class="kg-story-media">
+                        <a class="kg-story-main" href="weddings/harshita-himij.html" data-nav><img src="assets/weddings/harshita-himij/01.jpg" alt="Harshita &amp; Himij" loading="lazy" decoding="async"></a>
+                        <a class="kg-story-alt" href="weddings/harshita-himij.html" data-nav><img src="assets/weddings/harshita-himij/02.jpg" alt="" loading="lazy" decoding="async"></a>
+                    </div>
+                    <div class="kg-story-body">
+                        <div class="kg-story-index">03 &mdash; WEDDING</div>
+                        <h3 class="kg-story-name">Harshita &amp; Himij</h3>
+                        <div class="kg-story-meta"><span>Wedding</span><span>Evening Mandap</span><span>Grand Celebration</span></div>
+                        <p class="kg-story-text">A wedding built around a single, enormous evening — florals lit from beneath, a red lehenga catching every lamp in the room, and family pressing in from all sides for the parts that mattered most.</p>
+                        <a href="weddings/harshita-himij.html" class="kg-btn kg-btn-dark" data-nav>View the story</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="kg-section kg-section-dark">
+            <div class="kg-section-head">
+                <div>
+                    <div class="kg-eyebrow">Selected frames</div>
+                    <h2 class="kg-heading">The portfolio.</h2>
+                </div>
+                <a href="portfolio.html" class="kg-btn kg-btn-light" data-nav>Open the full gallery</a>
+            </div>
+            <div class="kg-grid kg-grid-4">
+                <figure data-full="assets/portfolio/p01-lg.jpg"><img src="assets/portfolio/p01.jpg" width="720" height="900" alt="" loading="lazy" decoding="async"></figure>
+                <figure data-full="assets/portfolio/p02-lg.jpg"><img src="assets/portfolio/p02.jpg" width="720" height="900" alt="" loading="lazy" decoding="async"></figure>
+                <figure data-full="assets/portfolio/p03-lg.jpg"><img src="assets/portfolio/p03.jpg" width="720" height="900" alt="" loading="lazy" decoding="async"></figure>
+                <figure data-full="assets/portfolio/p04-lg.jpg"><img src="assets/portfolio/p04.jpg" width="720" height="900" alt="" loading="lazy" decoding="async"></figure>
+                <figure data-full="assets/portfolio/p05-lg.jpg"><img src="assets/portfolio/p05.jpg" width="720" height="900" alt="" loading="lazy" decoding="async"></figure>
+                <figure data-full="assets/portfolio/p06-lg.jpg"><img src="assets/portfolio/p06.jpg" width="720" height="900" alt="" loading="lazy" decoding="async"></figure>
+                <figure data-full="assets/portfolio/p07-lg.jpg"><img src="assets/portfolio/p07.jpg" width="720" height="900" alt="" loading="lazy" decoding="async"></figure>
+                <figure data-full="assets/portfolio/p08-lg.jpg"><img src="assets/portfolio/p08.jpg" width="720" height="900" alt="" loading="lazy" decoding="async"></figure>
+                <figure data-full="assets/portfolio/p09-lg.jpg"><img src="assets/portfolio/p09.jpg" width="720" height="900" alt="" loading="lazy" decoding="async"></figure>
+                <figure data-full="assets/portfolio/p10-lg.jpg"><img src="assets/portfolio/p10.jpg" width="720" height="900" alt="" loading="lazy" decoding="async"></figure>
+                <figure data-full="assets/portfolio/p11-lg.jpg"><img src="assets/portfolio/p11.jpg" width="720" height="900" alt="" loading="lazy" decoding="async"></figure>
+                <figure data-full="assets/portfolio/p12-lg.jpg"><img src="assets/portfolio/p12.jpg" width="720" height="900" alt="" loading="lazy" decoding="async"></figure>
+            </div>
+        </section>
+
+        <section class="kg-section" style="padding-bottom:4rem">
+            <div class="kg-section-head" style="border:none;padding-bottom:0;margin-bottom:0">
+                <div>
+                    <div class="kg-eyebrow">What we shoot</div>
+                    <h2 class="kg-heading">Six ways<br><em>to be photographed.</em></h2>
+                </div>
+            </div>
+        </section>
+
+        <section class="projects-showcase" id="what-we-shoot">
+            <div class="step-progress">
+                <div class="step-progress-track">
+                    <div class="step-progress-fill" id="step-progress-fill"></div>
+                </div>
+                <div class="step-dots">
+                    <div class="step-dot active" data-step="1"><span>01</span></div>
+                    <div class="step-dot" data-step="2"><span>02</span></div>
+                    <div class="step-dot" data-step="3"><span>03</span></div>
+                    <div class="step-dot" data-step="4"><span>04</span></div>
+                    <div class="step-dot" data-step="5"><span>05</span></div>
+                    <div class="step-dot" data-step="6"><span>06</span></div>
+                </div>
+            </div>
+
+            <div class="showcase-container">
+                <div class="showcase-left">
+                    <div class="showcase-text-wrapper">
+                        <div class="showcase-text step-1">
+                            <div class="subtitle">WHAT WE SHOOT</div>
+                            <h2>Weddings</h2>
+                            <div class="showcase-divider"></div>
+                            <p>Full-day coverage from the first cup of chai to the last song &mdash; ceremony, ritual, and every face in the room.</p>
+                            <a href="contact.html" class="showcase-cta" data-text="ENQUIRE &rarr;" data-nav><span>ENQUIRE &rarr;</span></a>
+                        </div>
+                        <div class="showcase-text step-2">
+                            <div class="subtitle">WHAT WE SHOOT</div>
+                            <h2>Pre-Wedding</h2>
+                            <div class="showcase-divider"></div>
+                            <p>A relaxed half-day somewhere that means something to you. No stiff poses, just the two of you and good light.</p>
+                            <a href="contact.html" class="showcase-cta" data-text="ENQUIRE &rarr;" data-nav><span>ENQUIRE &rarr;</span></a>
+                        </div>
+                        <div class="showcase-text step-3">
+                            <div class="subtitle">WHAT WE SHOOT</div>
+                            <h2>Engagements</h2>
+                            <div class="showcase-divider"></div>
+                            <p>Intimate ceremonies at home or in a hall, photographed quietly so the moment stays the moment.</p>
+                            <a href="contact.html" class="showcase-cta" data-text="ENQUIRE &rarr;" data-nav><span>ENQUIRE &rarr;</span></a>
+                        </div>
+                        <div class="showcase-text step-4">
+                            <div class="subtitle">WHAT WE SHOOT</div>
+                            <h2>Bridal Portraits</h2>
+                            <div class="showcase-divider"></div>
+                            <p>Unhurried time set aside for the bride &mdash; jewellery, drape, hands, and the look before she walks out.</p>
+                            <a href="contact.html" class="showcase-cta" data-text="ENQUIRE &rarr;" data-nav><span>ENQUIRE &rarr;</span></a>
+                        </div>
+                        <div class="showcase-text step-5">
+                            <div class="subtitle">WHAT WE SHOOT</div>
+                            <h2>Haldi &amp; Mehendi</h2>
+                            <div class="showcase-divider"></div>
+                            <p>The loudest, most colourful days of the week, covered with the energy they deserve.</p>
+                            <a href="contact.html" class="showcase-cta" data-text="ENQUIRE &rarr;" data-nav><span>ENQUIRE &rarr;</span></a>
+                        </div>
+                        <div class="showcase-text step-6">
+                            <div class="subtitle">WHAT WE SHOOT</div>
+                            <h2>Films</h2>
+                            <div class="showcase-divider"></div>
+                            <p>A cinematic edit cut from the same day, so you can hear the vows as well as see them.</p>
+                            <a href="contact.html" class="showcase-cta" data-text="ENQUIRE &rarr;" data-nav><span>ENQUIRE &rarr;</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="showcase-right">
+                    <div class="showcase-image-wrapper">
+                        <div class="showcase-img-reveal reveal-step-1 reveal-active">
+                            <img class="showcase-img img-step-1" src="assets/offer/o01.jpg" alt="Weddings" loading="lazy" decoding="async">
+                        </div>
+                        <div class="showcase-img-reveal reveal-step-2">
+                            <img class="showcase-img img-step-2" src="assets/offer/o02.jpg" alt="Pre-Wedding" loading="lazy" decoding="async">
+                        </div>
+                        <div class="showcase-img-reveal reveal-step-3">
+                            <img class="showcase-img img-step-3" src="assets/offer/o03.jpg" alt="Engagements" loading="lazy" decoding="async">
+                        </div>
+                        <div class="showcase-img-reveal reveal-step-4">
+                            <img class="showcase-img img-step-4" src="assets/offer/o04.jpg" alt="Bridal Portraits" loading="lazy" decoding="async">
+                        </div>
+                        <div class="showcase-img-reveal reveal-step-5">
+                            <img class="showcase-img img-step-5" src="assets/offer/o05.jpg" alt="Haldi &amp; Mehendi" loading="lazy" decoding="async">
+                        </div>
+                        <div class="showcase-img-reveal reveal-step-6">
+                            <img class="showcase-img img-step-6" src="assets/offer/o06.jpg" alt="Films" loading="lazy" decoding="async">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stacked cards take over below 768px, where the pin is disabled -->
+            <div class="showcase-mobile-cards">
+                <div class="showcase-mobile-card">
+                    <img src="assets/offer/o01.jpg" alt="Weddings" loading="lazy" decoding="async">
+                    <div class="showcase-mobile-card-overlay">
+                        <div class="subtitle">WHAT WE SHOOT</div>
+                        <h3>Weddings</h3>
+                        <p>Full-day coverage from the first cup of chai to the last song &mdash; ceremony, ritual, and every face in the room.</p>
+                        <a href="contact.html" class="showcase-cta" data-text="ENQUIRE &rarr;" data-nav><span>ENQUIRE &rarr;</span></a>
+                    </div>
+                </div>
+                <div class="showcase-mobile-card">
+                    <img src="assets/offer/o02.jpg" alt="Pre-Wedding" loading="lazy" decoding="async">
+                    <div class="showcase-mobile-card-overlay">
+                        <div class="subtitle">WHAT WE SHOOT</div>
+                        <h3>Pre-Wedding</h3>
+                        <p>A relaxed half-day somewhere that means something to you. No stiff poses, just the two of you and good light.</p>
+                        <a href="contact.html" class="showcase-cta" data-text="ENQUIRE &rarr;" data-nav><span>ENQUIRE &rarr;</span></a>
+                    </div>
+                </div>
+                <div class="showcase-mobile-card">
+                    <img src="assets/offer/o03.jpg" alt="Engagements" loading="lazy" decoding="async">
+                    <div class="showcase-mobile-card-overlay">
+                        <div class="subtitle">WHAT WE SHOOT</div>
+                        <h3>Engagements</h3>
+                        <p>Intimate ceremonies at home or in a hall, photographed quietly so the moment stays the moment.</p>
+                        <a href="contact.html" class="showcase-cta" data-text="ENQUIRE &rarr;" data-nav><span>ENQUIRE &rarr;</span></a>
+                    </div>
+                </div>
+                <div class="showcase-mobile-card">
+                    <img src="assets/offer/o04.jpg" alt="Bridal Portraits" loading="lazy" decoding="async">
+                    <div class="showcase-mobile-card-overlay">
+                        <div class="subtitle">WHAT WE SHOOT</div>
+                        <h3>Bridal Portraits</h3>
+                        <p>Unhurried time set aside for the bride &mdash; jewellery, drape, hands, and the look before she walks out.</p>
+                        <a href="contact.html" class="showcase-cta" data-text="ENQUIRE &rarr;" data-nav><span>ENQUIRE &rarr;</span></a>
+                    </div>
+                </div>
+                <div class="showcase-mobile-card">
+                    <img src="assets/offer/o05.jpg" alt="Haldi &amp; Mehendi" loading="lazy" decoding="async">
+                    <div class="showcase-mobile-card-overlay">
+                        <div class="subtitle">WHAT WE SHOOT</div>
+                        <h3>Haldi &amp; Mehendi</h3>
+                        <p>The loudest, most colourful days of the week, covered with the energy they deserve.</p>
+                        <a href="contact.html" class="showcase-cta" data-text="ENQUIRE &rarr;" data-nav><span>ENQUIRE &rarr;</span></a>
+                    </div>
+                </div>
+                <div class="showcase-mobile-card">
+                    <img src="assets/offer/o06.jpg" alt="Films" loading="lazy" decoding="async">
+                    <div class="showcase-mobile-card-overlay">
+                        <div class="subtitle">WHAT WE SHOOT</div>
+                        <h3>Films</h3>
+                        <p>A cinematic edit cut from the same day, so you can hear the vows as well as see them.</p>
+                        <a href="contact.html" class="showcase-cta" data-text="ENQUIRE &rarr;" data-nav><span>ENQUIRE &rarr;</span></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="kg-cta">
+            <div class="kg-cta-bg">
+                <img src="assets/about/c01.jpg" alt="" loading="lazy" decoding="async">
+                <div class="kg-video-holder" data-video="QZ2c1hm1HWY" data-video-title="Kissago Art Co. showreel"></div>
+            </div>
+            <div class="kg-cta-inner" data-reveal="up">
+                <div class="kg-eyebrow">Dates go quickly</div>
+                <h2 class="kg-heading">Tell us about<br><em>your wedding.</em></h2>
+                <p>Send us the dates, the city, and anything about the two of you that a schedule
+                   would never capture. We only take on a limited number of weddings each season.</p>
+                <a href="contact.html" class="kg-btn kg-btn-light" data-nav>Check your date</a>
+            </div>
+        </section>
+    </div>
+
+    <footer class="site-footer" id="site-footer">
+        <div class="footer-content">
+            <div class="footer-top">
+                <div class="footer-col">
+                    <h4>Studio</h4>
+                    <p>Kissago Art Co.<br>Pune, Maharashtra<br>India</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Enquiries</h4>
+                    <p>
+                        <a href="mailto:hello@kissago.art">hello@kissago.art</a><br>
+                        +91 98XXX XXXXX
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Follow</h4>
+                    <div class="footer-social-links">
+                        <a href="https://instagram.com/" class="footer-social-icon" aria-label="Instagram" target="_blank" rel="noopener">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        </a>
+                        <a href="https://pinterest.com/" class="footer-social-icon" aria-label="Pinterest" target="_blank" rel="noopener">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="12" x2="12" y2="22"></line><path d="M12 12c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5c0 2.24-1.76 4-4 4-1.7 0-3 1.3-3 3"></path></svg>
+                        </a>
+                        <a href="mailto:hello@kissago.art" class="footer-social-icon" aria-label="Email">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 6L2 7"></path></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigate</h4>
+                    <div class="footer-nav-links">
+                        <a href="index.html" class="footer-link" data-text="Home" data-nav><span>Home</span></a>
+                        <a href="weddings.html" class="footer-link" data-text="Featured Weddings" data-nav><span>Featured Weddings</span></a>
+                        <a href="portfolio.html" class="footer-link" data-text="Portfolio" data-nav><span>Portfolio</span></a>
+                        <a href="about.html" class="footer-link" data-text="About" data-nav><span>About</span></a>
+                        <a href="contact.html" class="footer-link" data-text="Contact" data-nav><span>Contact</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <a href="#" class="back-to-top" id="back-to-top" aria-label="Back to top">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+                </a>
+                <a href="index.html" class="kg-logo footer-brand-logo" data-nav aria-label="Kissago Art Co. — home"><img src="assets/logo/kissago-cream.png" alt="Kissago Art Co."></a>
+                <div class="footer-legal">
+                    <p>&copy; 2026 Kissago Art Co. All rights reserved.</p>
+                    <p>Every frame, a story.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="kg-lightbox" id="kg-lightbox" role="dialog" aria-modal="true" aria-label="Photograph viewer">
+        <button class="kg-lb-btn kg-lb-close" aria-label="Close">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+        <div class="kg-lb-stage">
+            <button class="kg-lb-btn kg-lb-prev" aria-label="Previous">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <img alt="">
+            <button class="kg-lb-btn kg-lb-next" aria-label="Next">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+        </div>
+        <div class="kg-lb-foot">
+            <div class="kg-lb-count"></div>
+            <div class="kg-lb-strip" role="tablist" aria-label="Photographs in this gallery"></div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+    <script src="common.js"></script>
+    <script src="kissago.js"></script>
+</body>
+
+</html>

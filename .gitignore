@@ -1,0 +1,8 @@
+# Original full-resolution uploads. The site serves the optimised copies in
+# assets/, generated from these — keep the originals locally, out of the repo.
+kissago images/
+kissago logo/
+
+node_modules/
+.DS_Store
+Thumbs.db

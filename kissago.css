@@ -1,0 +1,1125 @@
+/* ============================================================
+   kissago.css — photography layer on top of style.css / inner-style.css
+   Palette: accent #2b3d2d · background #ebedd1
+   ============================================================ */
+
+:root {
+    --accent: #2b3d2d;
+    --bg: #ebedd1;
+    --accent-ink: #1d2a1f;
+    --rule: rgba(43, 61, 45, 0.16);
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--accent);
+}
+
+/* ------------------------------------------------------------------
+   Brand lockup — the wordmark is artwork, so it ships as two tinted
+   PNGs and we swap by context rather than recolouring in CSS.
+   ------------------------------------------------------------------ */
+.kg-logo {
+    display: block;
+    line-height: 0;
+}
+
+.kg-logo img {
+    display: block;
+    width: auto;
+    height: 34px;
+}
+
+.header .kg-logo img {
+    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.35));
+}
+
+.kg-logo-sm img { height: 26px; }
+
+/* ------------------------------------------------------------------
+   Preloader
+   ------------------------------------------------------------------ */
+.preloader { background-color: var(--accent); }
+
+.preloader .kg-logo img {
+    height: clamp(40px, 8vw, 76px);
+}
+
+.preloader-brand {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: preloaderBrandIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+.preloader-tag {
+    margin-top: 1.1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 300;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(235, 237, 209, 0.55);
+    text-align: center;
+}
+
+.page-transition { background-color: var(--accent); }
+.page-transition .kg-logo img { height: clamp(34px, 6vw, 58px); }
+
+/* ------------------------------------------------------------------
+   Header / menu
+   ------------------------------------------------------------------ */
+.header.header-solid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem 3rem;
+    background: rgba(235, 237, 209, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--rule);
+    align-items: center;
+}
+
+.header.header-solid .kg-logo img { filter: none; }
+.header.header-solid .menu-btn .line { background-color: var(--accent); }
+
+.menu-overlay { background-color: var(--bg); }
+
+/* style.css sizes these at a flat 8vw, which was fine for one-word labels but
+   runs the longer ones straight under the hover art. */
+.menu-nav .menu-link {
+    color: var(--accent);
+    font-size: clamp(2.4rem, 6vw, 5.2rem);
+}
+
+/* Menu hover art — style.css wires these :has() rules for the old nav targets;
+   these are the photography site's four. */
+.menu-body:has(.menu-link[data-target="home"]:hover) .home-img,
+.menu-body:has(.menu-link[data-target="weddings"]:hover) .weddings-img,
+.menu-body:has(.menu-link[data-target="portfolio"]:hover) .portfolio-img,
+.menu-body:has(.menu-link[data-target="about"]:hover) .about-img {
+    opacity: 1;
+}
+
+.menu-tagline {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(43, 61, 45, 0.5);
+    margin-top: 1.6rem;
+}
+
+/* ------------------------------------------------------------------
+   Home hero — a wall of portrait frames rather than one upscaled
+   photo, because every source file is only 1200px on the long edge.
+   ------------------------------------------------------------------ */
+.kg-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    min-height: 620px;
+    overflow: hidden;
+    background-color: var(--accent-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kg-hero-wall {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.kg-hero-pane {
+    position: relative;
+    overflow: hidden;
+}
+
+.kg-hero-pane img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.08);
+    animation: kgHeroDrift 18s ease-in-out infinite alternate;
+}
+
+.kg-hero-pane:nth-child(2) img { animation-delay: -4s; }
+.kg-hero-pane:nth-child(3) img { animation-delay: -8s; }
+.kg-hero-pane:nth-child(4) img { animation-delay: -12s; }
+
+@keyframes kgHeroDrift {
+    from { transform: scale(1.08) translateY(-1.5%); }
+    to   { transform: scale(1.16) translateY(1.5%); }
+}
+
+/* ---- background video --------------------------------------------------
+   The photo wall underneath doubles as the poster: if the embed is blocked,
+   slow, or refused autoplay (iOS), the stills stay on screen.
+
+   YouTube letterboxes to 16:9 and paints its own title/watermark near the
+   edges, so the frame is sized to cover the container and then scaled past it.
+   Sizing uses container units rather than the viewport units the template
+   used, because the CTA band is nowhere near viewport-sized. */
+.kg-video-holder {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    container-type: size;
+    pointer-events: none;
+    /* Hidden until the player reports it is actually playing. A blocked or
+       unavailable embed paints an opaque "Video unavailable" panel, which would
+       otherwise wipe out the stills behind it. */
+    opacity: 0;
+    transition: opacity 1.4s var(--ease-out-expo);
+}
+
+.kg-video-holder.is-playing { opacity: 1; }
+
+.kg-video-holder iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100cqw;
+    height: 56.25cqw;
+    min-height: 100cqh;
+    min-width: 177.78cqh;
+    transform: translate(-50%, -50%) scale(1.35);
+    border: 0;
+    pointer-events: none;
+}
+
+.kg-hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    text-align: center;
+    padding: 0;
+}
+
+/* A flat black scrim on every hero — home and inner pages alike. It sits above
+   the footage and stills but below the copy (which is z-index 2), so it lifts
+   the type without touching the headline or button colours. */
+.kg-hero::after,
+.inner-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Display-scale Didone. The elegance comes from three things working together:
+   very high stroke contrast (Bodoni's optical-size axis thins the hairlines
+   further as the size grows), tracking pulled almost to zero so the letters
+   nearly touch, and no heavy shadow — the hero scrim carries legibility now.
+   text-indent cancels the trailing letter-space so the word stays optically
+   centred. */
+.kg-hero-title {
+    font-family: 'Bodoni Moda', 'Cormorant Garamond', serif;
+    font-optical-sizing: auto;
+    font-size: clamp(2.4rem, 18.5vw, 25rem);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+    /* 0.005em cancels the trailing letter-space; the rest offsets Bodoni's
+       wider right sidebearing on the O against the K's tighter left one, which
+       otherwise leaves the word sitting ~10px left of centre. Measured from
+       rendered pixels, not from the text box. */
+    text-indent: 0.08em;
+    line-height: 0.95;
+    color: #fbfbf4;
+    margin: 0;
+    white-space: nowrap;
+    text-shadow: 0 2px 24px rgba(18, 27, 20, 0.28);
+}
+
+/* Same treatment for the inner-page heroes, whose titles and meta now sit
+   directly on the photograph. */
+.inner-hero-title,
+.inner-hero-eyebrow,
+.inner-hero-meta p {
+    text-shadow: 0 1px 3px rgba(18, 27, 20, 0.65), 0 8px 32px rgba(18, 27, 20, 0.55);
+}
+
+/* These were 40–50% alpha cream, which only worked against the gradient that
+   used to sit here. Full-strength cream plus a tight opaque halo holds them
+   against bright detail — including moving footage — with nothing laid over
+   the image itself. */
+.inner-hero-eyebrow,
+.inner-hero-meta p {
+    color: rgba(235, 237, 209, 0.92);
+    text-shadow:
+        0 0 5px rgba(18, 27, 20, 0.95),
+        0 0 12px rgba(18, 27, 20, 0.85),
+        0 1px 2px rgba(18, 27, 20, 1);
+}
+
+.inner-hero-eyebrow::before { background-color: rgba(235, 237, 209, 0.8); }
+
+/* ------------------------------------------------------------------
+   Buttons
+   ------------------------------------------------------------------ */
+.kg-btn {
+    display: inline-block;
+    padding: 0.95rem 2.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.66rem;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid currentColor;
+    border-radius: 2px;
+    transition: background-color 0.45s var(--ease-out-expo),
+                color 0.45s var(--ease-out-expo),
+                letter-spacing 0.45s var(--ease-out-expo);
+}
+
+.kg-btn-light { color: #f3f4e0; }
+.kg-btn-light:hover { background-color: #f3f4e0; color: var(--accent); letter-spacing: 4px; }
+
+.kg-btn-dark { color: var(--accent); }
+.kg-btn-dark:hover { background-color: var(--accent); color: var(--bg); letter-spacing: 4px; }
+
+.kg-btn-solid {
+    background-color: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+}
+.kg-btn-solid:hover { background-color: transparent; color: var(--accent); letter-spacing: 4px; }
+
+/* ------------------------------------------------------------------
+   Section furniture
+   ------------------------------------------------------------------ */
+/* clip, not hidden: it contains stray width from entrance transforms without
+   turning the section into a scroll container. Clipping happens at the padding
+   box, so the full-bleed galleries below still reach both edges. */
+.kg-section { padding: 9rem 3rem; overflow-x: clip; }
+.kg-section-dark { background-color: var(--accent); color: var(--bg); }
+.kg-section-tight { padding: 6rem 3rem; }
+
+.kg-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 400;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    opacity: 0.55;
+    margin-bottom: 1.4rem;
+}
+
+.kg-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 5.5vw, 4.6rem);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.5px;
+}
+
+.kg-heading em { font-style: italic; }
+
+.kg-body {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.9;
+    opacity: 0.82;
+    max-width: 46ch;
+}
+
+.kg-section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 3rem;
+    flex-wrap: wrap;
+    margin-bottom: 4rem;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2rem;
+}
+
+.kg-section-dark .kg-section-head { border-bottom-color: rgba(235, 237, 209, 0.18); }
+
+/* ------------------------------------------------------------------
+   Home — intro split
+   ------------------------------------------------------------------ */
+.kg-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+.kg-intro-figs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+    align-items: start;
+}
+
+.kg-intro-figs img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+}
+
+.kg-intro-figs > :nth-child(2) { margin-top: 4rem; }
+
+.kg-signature {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    margin-top: 2.2rem;
+    opacity: 0.7;
+}
+
+/* ------------------------------------------------------------------
+   Wedding story cards
+   ------------------------------------------------------------------ */
+.kg-stories {
+    display: flex;
+    flex-direction: column;
+    gap: 7rem;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+.kg-story {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 4.5rem;
+    align-items: center;
+}
+
+.kg-story:nth-child(even) .kg-story-media { order: 2; }
+
+.kg-story-media {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 1.2rem;
+    align-items: end;
+}
+
+.kg-story-media img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 1.1s var(--ease-out-expo);
+}
+
+.kg-story-media a { overflow: hidden; display: block; }
+.kg-story-media a:hover img { transform: scale(1.05); }
+
+.kg-story-media .kg-story-main img { aspect-ratio: 4 / 5; }
+.kg-story-media .kg-story-alt img { aspect-ratio: 3 / 4; }
+
+.kg-story-index {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 4px;
+    opacity: 0.45;
+    margin-bottom: 1.2rem;
+}
+
+.kg-story-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4.6vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.05;
+    margin-bottom: 0.9rem;
+}
+
+.kg-story-name em { font-style: italic; opacity: 0.7; }
+
+.kg-story-meta {
+    display: flex;
+    gap: 1.6rem;
+    flex-wrap: wrap;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.64rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 1.8rem;
+}
+
+/* The separator trails its own item so a wrapped line never starts with a
+   stray dot. */
+.kg-story-meta { gap: 0.5rem 0.9rem; }
+
+.kg-story-meta span:not(:last-child)::after {
+    content: '\00b7';
+    margin-left: 0.9rem;
+    opacity: 0.5;
+}
+
+.kg-story-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.9;
+    opacity: 0.82;
+    max-width: 44ch;
+    margin-bottom: 2.2rem;
+}
+
+/* ------------------------------------------------------------------
+   Gallery grid — full-bleed, tight-gutter masonry.
+
+   Every source photograph is 4:5, so height variation has to come from
+   scale rather than crop: roughly one tile in six spans two columns and
+   two rows, which knocks the surrounding columns out of step. A 2x2 tile
+   measures (2C + gap) x (2 x 1.25C + gap) — off true 4:5 by 0.25 x gap,
+   i.e. under 2px, so nothing is cropped at either size.
+
+   The negative inline margin cancels .kg-section's side padding exactly,
+   giving edge-to-edge width without the 100vw scrollbar overflow.
+   ------------------------------------------------------------------ */
+.kg-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-flow: dense;
+    gap: 6px;
+    margin-inline: -3rem;
+}
+
+.kg-grid figure {
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+    cursor: zoom-in;
+    aspect-ratio: 4 / 5;
+    background-color: rgba(43, 61, 45, 0.08);
+}
+
+.kg-grid figure.kg-wide { grid-column: span 2; grid-row: span 2; }
+/* Alternating feature tiles so they don't all stack down the left edge. */
+.kg-grid figure.kg-wide-r { grid-column: 2 / span 2; }
+
+.kg-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 1.2s var(--ease-out-expo),
+                filter 0.6s var(--ease-out-expo);
+}
+
+.kg-grid figure:hover img { transform: scale(1.045); }
+
+.kg-grid figure::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(43, 61, 45, 0.22);
+    opacity: 0;
+    transition: opacity 0.5s var(--ease-out-expo);
+    pointer-events: none;
+}
+
+.kg-grid figure:hover::after { opacity: 1; }
+
+/* Compact preview strips stay uniform — feature tiles would make a
+   twelve-image teaser taller than the section it sits in. */
+.kg-grid-4 { grid-template-columns: repeat(4, 1fr); }
+.kg-grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+/* Filter bar */
+.kg-filters {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 3.5rem;
+}
+
+.kg-filter {
+    background: none;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 0.6rem 1.4rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 400;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    cursor: pointer;
+    transition: background-color 0.4s var(--ease-out-expo),
+                color 0.4s var(--ease-out-expo),
+                border-color 0.4s var(--ease-out-expo);
+}
+
+.kg-filter:hover { border-color: var(--accent); }
+.kg-filter.active { background-color: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+.kg-grid figure.is-hidden { display: none; }
+
+/* ------------------------------------------------------------------
+   Lightbox
+   ------------------------------------------------------------------ */
+.kg-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: rgba(29, 42, 31, 0.97);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    padding: 4.5rem 0 1.4rem;
+    transition: opacity 0.4s var(--ease-out-expo), visibility 0.4s;
+}
+
+.kg-lightbox.active { opacity: 1; visibility: visible; }
+
+/* The stage takes whatever height the filmstrip leaves it; min-height:0 is
+   what lets a flex child actually shrink below its content size. */
+.kg-lb-stage {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kg-lb-stage img {
+    max-width: 88vw;
+    max-height: 100%;
+    object-fit: contain;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+/* ---- filmstrip ---- */
+.kg-lb-foot {
+    flex-shrink: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    padding-top: 1.2rem;
+}
+
+.kg-lb-strip {
+    display: flex;
+    gap: 6px;
+    max-width: min(92vw, 940px);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    padding: 3px;
+}
+
+.kg-lb-strip::-webkit-scrollbar { display: none; }
+
+.kg-lb-thumb {
+    flex: 0 0 auto;
+    width: 54px;
+    aspect-ratio: 4 / 5;
+    padding: 0;
+    background: none;
+    border: 2px solid transparent;
+    border-radius: 2px;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0.4;
+    transition: opacity 0.35s var(--ease-out-expo),
+                border-color 0.35s var(--ease-out-expo);
+}
+
+.kg-lb-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.kg-lb-thumb:hover { opacity: 0.85; }
+
+.kg-lb-thumb.active {
+    opacity: 1;
+    border-color: #f3f4e0;
+}
+
+.kg-lb-btn {
+    position: absolute;
+    background: none;
+    border: 1px solid rgba(235, 237, 209, 0.3);
+    color: #f3f4e0;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.35s, border-color 0.35s;
+}
+
+.kg-lb-btn:hover { background-color: rgba(235, 237, 209, 0.14); border-color: rgba(235, 237, 209, 0.6); }
+
+.kg-lb-close { top: 2rem; right: 2rem; }
+.kg-lb-prev { left: 2rem; top: 50%; transform: translateY(-50%); }
+.kg-lb-next { right: 2rem; top: 50%; transform: translateY(-50%); }
+
+/* Now a flow item inside .kg-lb-foot, above the filmstrip. */
+.kg-lb-count {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.66rem;
+    letter-spacing: 3px;
+    color: rgba(235, 237, 209, 0.6);
+}
+
+/* ------------------------------------------------------------------
+   Services / what we shoot
+   ------------------------------------------------------------------ */
+.kg-offer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background-color: rgba(235, 237, 209, 0.18);
+    max-width: 1500px;
+    margin: 0 auto;
+    border: 1px solid rgba(235, 237, 209, 0.18);
+}
+
+.kg-offer-item {
+    background-color: var(--accent);
+    padding: 3.2rem 2.6rem;
+    transition: background-color 0.5s var(--ease-out-expo);
+}
+
+.kg-offer-item:hover { background-color: var(--accent-ink); }
+
+.kg-offer-num {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 3px;
+    opacity: 0.45;
+    margin-bottom: 1.6rem;
+}
+
+.kg-offer-item h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.75rem;
+    font-weight: 300;
+    margin-bottom: 0.9rem;
+}
+
+.kg-offer-item p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 300;
+    line-height: 1.85;
+    opacity: 0.72;
+}
+
+/* ------------------------------------------------------------------
+   Pinned service showcase — the template's "Expertise" section, carrying
+   six steps instead of three and a portrait frame instead of landscape.
+   ------------------------------------------------------------------ */
+
+/* ---- step rail ----
+   Six dots need more rail than the original three. The fill is driven straight
+   from scroll progress, so it must not carry a CSS transition of its own —
+   otherwise it eases toward a target instead of tracking the wheel. */
+.projects-showcase .step-progress { height: 360px; }
+
+.projects-showcase .step-progress-track { background-color: rgba(43, 61, 45, 0.13); }
+
+.projects-showcase .step-progress-fill {
+    height: 0%;
+    background-color: var(--accent);
+    transition: none;
+}
+
+.projects-showcase .step-dot {
+    width: 6px;
+    height: 6px;
+    background-color: rgba(43, 61, 45, 0.2);
+    /* No transform here: the number label is a child, and scaling the dot
+       would scale the type with it. */
+    transition: background-color 0.45s var(--ease-out-expo),
+                box-shadow 0.45s var(--ease-out-expo);
+}
+
+.projects-showcase .step-dot.active {
+    background-color: var(--accent);
+    transform: none;
+}
+
+.projects-showcase .step-dot.is-current {
+    background-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(43, 61, 45, 0.13);
+}
+
+.projects-showcase .step-dot span {
+    left: 24px;
+    font-size: 0.58rem;
+    font-weight: 400;
+    letter-spacing: 2.5px;
+    font-variant-numeric: tabular-nums;
+    color: rgba(43, 61, 45, 0.24);
+    transition: color 0.45s var(--ease-out-expo);
+}
+
+.projects-showcase .step-dot.active span { color: rgba(43, 61, 45, 0.42); }
+.projects-showcase .step-dot.is-current span { color: var(--accent); }
+
+/* Every photograph here is 4:5, so the frame is portrait — a landscape
+   window would crop faces out of these. */
+.projects-showcase .showcase-image-wrapper {
+    width: auto;
+    height: min(74vh, 52vw);
+    aspect-ratio: 4 / 5;
+}
+
+.projects-showcase .showcase-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.showcase-eyebrow-rule { display: none; }
+
+@media (max-width: 900px) {
+    .projects-showcase .showcase-image-wrapper { height: auto; width: 100%; }
+}
+
+/* ------------------------------------------------------------------
+   Process timeline (about page)
+
+   The four steps are strung along a single hairline that draws in as the
+   section passes, so the sequence reads as one journey rather than four
+   loose columns. Same motif as the pinned showcase rail, laid on its side.
+   ------------------------------------------------------------------ */
+.kg-process {
+    --pgap: 2.5rem;
+    --rail: 4.2rem;         /* numeral height + half the gap beneath it */
+    position: relative;
+    margin: 0 auto;
+    max-width: 1500px;
+}
+
+.kg-process-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--pgap);
+}
+
+/* Runs from the first dot to the last: the right inset is exactly one
+   column, so the line stops on the final marker instead of overshooting. */
+.kg-process-rail {
+    position: absolute;
+    top: var(--rail);
+    left: 0;
+    right: calc((100% - 3 * var(--pgap)) / 4);
+    height: 1px;
+    background-color: rgba(43, 61, 45, 0.16);
+}
+
+.kg-process-fill {
+    height: 100%;
+    width: 0;
+    background-color: var(--accent);
+    transform-origin: left center;
+}
+
+.kg-process-step {
+    position: relative;
+    padding-right: 1rem;
+}
+
+/* The marker sits on the line, punched out of the page colour so the rule
+   appears to pass behind it. */
+.kg-process-step::before {
+    content: '';
+    position: absolute;
+    top: calc(var(--rail) - 4px);
+    left: 0;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background-color: var(--bg);
+    box-shadow: inset 0 0 0 1px rgba(43, 61, 45, 0.3);
+    transition: background-color 0.5s var(--ease-out-expo),
+                box-shadow 0.5s var(--ease-out-expo);
+    z-index: 1;
+}
+
+.kg-process-step.is-on::before {
+    background-color: var(--accent);
+    box-shadow: inset 0 0 0 1px var(--accent), 0 0 0 4px rgba(43, 61, 45, 0.1);
+}
+
+.kg-process-num {
+    display: block;
+    font-family: 'Bodoni Moda', 'Cormorant Garamond', serif;
+    font-optical-sizing: auto;
+    font-size: 3rem;
+    font-weight: 400;
+    line-height: 1;
+    height: 3rem;
+    /* Bodoni's figures are already wide; any added tracking reads as a gap
+       between the two digits. */
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+    color: rgba(43, 61, 45, 0.22);
+    margin-bottom: calc(var(--rail) - 3rem + 1.9rem);
+    transition: color 0.5s var(--ease-out-expo);
+}
+
+.kg-process-step.is-on .kg-process-num { color: var(--accent); }
+
+.kg-process-step h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.65rem;
+    font-weight: 400;
+    color: var(--accent);
+    margin: 0 0 0.8rem;
+}
+
+.kg-process-step p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 300;
+    line-height: 1.85;
+    color: #6e7d6c;
+    margin: 0;
+}
+
+@media (max-width: 1024px) {
+    .kg-process-list { grid-template-columns: repeat(2, 1fr); row-gap: 3.5rem; }
+    /* Two rows of markers would need two rails; the vertical treatment below
+       is cleaner than threading one through a wrapped grid. */
+    .kg-process-rail { display: none; }
+    .kg-process-step { padding-left: 1.8rem; border-left: 1px solid rgba(43, 61, 45, 0.16); }
+    .kg-process-step::before { top: 0.5rem; left: -5px; }
+    .kg-process-num { margin-bottom: 1.2rem; }
+}
+
+@media (max-width: 620px) {
+    .kg-process-list { grid-template-columns: 1fr; row-gap: 2.8rem; }
+    .kg-process-num { font-size: 2.4rem; height: 2.4rem; }
+}
+
+/* ------------------------------------------------------------------
+   Contact page
+   ------------------------------------------------------------------ */
+.kg-contact {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 6rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: start;
+}
+
+.kg-contact-detail { margin-bottom: 2.6rem; }
+
+.kg-contact-detail h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0.5;
+    margin-bottom: 0.7rem;
+}
+
+.kg-contact-detail p,
+.kg-contact-detail a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: inherit;
+    text-decoration: none;
+    line-height: 1.6;
+    transition: opacity 0.35s;
+}
+
+.kg-contact-detail a:hover { opacity: 0.6; }
+
+.kg-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.8rem 1.6rem;
+}
+
+.kg-field { display: flex; flex-direction: column; }
+.kg-field-full { grid-column: 1 / -1; }
+
+.kg-field label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    opacity: 0.55;
+    margin-bottom: 0.7rem;
+}
+
+.kg-field input,
+.kg-field select,
+.kg-field textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--rule);
+    padding: 0.7rem 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--accent);
+    border-radius: 0;
+    transition: border-color 0.4s var(--ease-out-expo);
+}
+
+.kg-field textarea { resize: vertical; min-height: 110px; }
+
+.kg-field input:focus,
+.kg-field select:focus,
+.kg-field textarea:focus {
+    outline: none;
+    border-bottom-color: var(--accent);
+}
+
+.kg-form-status {
+    grid-column: 1 / -1;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 300;
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.kg-form-status.show { opacity: 0.75; }
+
+.kg-map-note {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 300;
+    line-height: 1.9;
+    opacity: 0.7;
+}
+
+/* ------------------------------------------------------------------
+   CTA band
+   ------------------------------------------------------------------ */
+.kg-cta {
+    position: relative;
+    padding: 10rem 3rem;
+    text-align: center;
+    background-color: var(--accent);
+    color: var(--bg);
+    overflow: hidden;
+}
+
+/* Undimmed — the footage and stills play at full strength. */
+.kg-cta-bg {
+    position: absolute;
+    inset: 0;
+}
+
+.kg-cta-bg img { width: 100%; height: 100%; object-fit: cover; }
+
+.kg-cta-inner { position: relative; z-index: 1; }
+
+/* No scrim over the footage, so legibility is carried by the type itself —
+   a tight shadow for edge definition plus a wide soft one for separation. */
+.kg-cta-inner .kg-eyebrow,
+.kg-cta-inner .kg-heading,
+.kg-cta-inner p {
+    text-shadow: 0 1px 3px rgba(18, 27, 20, 0.6), 0 6px 28px rgba(18, 27, 20, 0.5);
+}
+
+.kg-cta-inner .kg-eyebrow { opacity: 0.85; }
+
+.kg-cta-inner .kg-btn-light {
+    text-shadow: 0 1px 3px rgba(18, 27, 20, 0.6);
+    box-shadow: 0 4px 24px rgba(18, 27, 20, 0.35);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+}
+
+.kg-cta .kg-heading { margin-bottom: 1.6rem; }
+
+.kg-cta p {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.9;
+    opacity: 0.8;
+    max-width: 52ch;
+    margin: 0 auto 2.8rem;
+}
+
+/* ------------------------------------------------------------------
+   Footer overrides
+   ------------------------------------------------------------------ */
+.site-footer { background-color: var(--accent); }
+
+.footer-brand-logo { margin: 0 auto; }
+.footer-brand-logo img { height: clamp(38px, 7vw, 82px); }
+
+/* ------------------------------------------------------------------
+   Responsive
+   ------------------------------------------------------------------ */
+@media (max-width: 1100px) {
+    .kg-grid { grid-template-columns: repeat(2, 1fr); }
+    .kg-grid-4 { grid-template-columns: repeat(3, 1fr); }
+    /* Two columns: a feature tile is the full width, so it can only start
+       at column 1 — otherwise it spills into an implicit third track. */
+    .kg-grid figure.kg-wide-r { grid-column: span 2; }
+    .kg-offer { grid-template-columns: repeat(2, 1fr); }
+    .kg-hero-wall { grid-template-columns: repeat(3, 1fr); }
+    .kg-hero-pane:nth-child(4) { display: none; }
+}
+
+@media (max-width: 900px) {
+    .kg-section, .kg-cta { padding: 6rem 1.8rem; }
+    .kg-section-tight { padding: 4.5rem 1.8rem; }
+    .header.header-solid { padding: 1.1rem 1.5rem; }
+    .kg-intro { grid-template-columns: 1fr; gap: 3rem; }
+    .kg-story { grid-template-columns: 1fr; gap: 2.2rem; }
+    .kg-story:nth-child(even) .kg-story-media { order: 0; }
+    .kg-stories { gap: 4.5rem; }
+    .kg-contact { grid-template-columns: 1fr; gap: 3rem; }
+    .kg-grid { margin-inline: -1.8rem; }
+}
+
+@media (max-width: 620px) {
+    .kg-hero-wall { grid-template-columns: repeat(2, 1fr); }
+    .kg-hero-pane:nth-child(3) { display: none; }
+    .kg-grid, .kg-grid-4 { grid-template-columns: repeat(2, 1fr); gap: 4px; }
+    .kg-offer { grid-template-columns: 1fr; }
+    .kg-form { grid-template-columns: 1fr; }
+    .menu-nav .menu-link { font-size: clamp(2rem, 9vw, 3.2rem); }
+    .kg-story-media { grid-template-columns: 1.4fr 1fr; gap: 0.7rem; }
+    .kg-intro-figs { gap: 0.8rem; }
+    .kg-intro-figs > :nth-child(2) { margin-top: 2rem; }
+    .kg-hero-actions { gap: 0.8rem; }
+    .kg-btn { padding: 0.85rem 1.5rem; font-size: 0.6rem; }
+    .kg-lb-prev { left: 0.6rem; }
+    .kg-lb-next { right: 0.6rem; }
+    .kg-lb-close { top: 1rem; right: 1rem; }
+    .kg-lightbox { padding: 3.6rem 0 1rem; }
+    .kg-lb-stage img { max-width: 94vw; }
+    .kg-lb-foot { gap: 0.6rem; padding-top: 0.8rem; }
+    .kg-lb-strip { max-width: 96vw; gap: 4px; }
+    .kg-lb-thumb { width: 40px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .kg-hero-pane img { animation: none; transform: scale(1.02); }
+}
