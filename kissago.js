@@ -65,6 +65,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =============================================
+    // Hero drift — four full-bleed stills animating scale forever is real GPU
+    // work on every frame, and it kept running long after the hero had been
+    // scrolled past. Park it while it is off screen; the animation is on a
+    // -delay cycle, so resuming picks up wherever it would have been anyway.
+    // =============================================
+    (function heroDrift() {
+        const wall = document.querySelector('.kg-hero-wall');
+        if (!wall || !('IntersectionObserver' in window)) return;
+        new IntersectionObserver(([entry]) => {
+            wall.classList.toggle('is-idle', !entry.isIntersecting);
+        }, { rootMargin: '100px' }).observe(wall);
+    })();
+
+    // =============================================
     // Background video
     // Injected rather than inlined so the markup ships without a third-party
     // player: the hero mounts straight away, the CTA waits until it is near,
@@ -195,7 +209,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const frac = local <= HOLD ? k : k + Math.min(1, (local - HOLD) / TRANS);
 
             // Dots sit at i/(n-1) of the rail, so the fill maps the same way.
-            if (fill) fill.style.height = (frac / (n - 1) * 100) + '%';
+            // Painted with scaleY rather than a percentage height: this runs on
+            // every scrubbed frame, and a height write forces a layout pass each
+            // time, where a transform is handed straight to the compositor. The
+            // fill is a plain solid bar, so the two are pixel-identical.
+            if (fill) fill.style.transform = 'scaleY(' + (frac / (n - 1)) + ')';
 
             const current = Math.round(frac);
             dots.forEach((d, i) => {
@@ -417,7 +435,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // i/(n-1) of the rail. Without GSAP, or with motion reduced, show the
         // finished state rather than an empty rail.
         const settle = () => {
-            if (fill) fill.style.width = '100%';
+            if (fill) fill.style.transform = 'scaleX(1)';
             steps.forEach(s => s.classList.add('is-on'));
         };
 
@@ -435,7 +453,9 @@ document.addEventListener('DOMContentLoaded', () => {
             scrub: 0.5,
             onUpdate: self => {
                 const p = self.progress;
-                if (fill) fill.style.width = (p * 100) + '%';
+                // scaleX, not a percentage width: this fires on every scrubbed
+                // frame and a width write would force a layout pass each time.
+                if (fill) fill.style.transform = 'scaleX(' + p + ')';
                 steps.forEach((s, i) => s.classList.toggle('is-on', p >= i / (n - 1) - 0.001));
             }
         });

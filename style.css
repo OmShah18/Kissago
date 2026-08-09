@@ -1,3 +1,7 @@
+/* Keep this @import. It looks redundant against the <link> in each page's
+   <head>, which requests the same families and weights, but that <link> does
+   not always deliver them — removing this line dropped the site to fallback
+   serifs, which render far heavier than Cormorant Garamond. */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
 
 * {
@@ -479,6 +483,7 @@ body {
 
 .get-in-touch-btn {
     color: var(--cream-light);
+    text-decoration: none;
     border: none;
     border-radius: 30px;
     font-family: 'DM Sans', sans-serif;
@@ -499,8 +504,20 @@ body {
     transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
+/* The incoming half of the roll-up: a second copy of the label parked one
+   button-height below and clipped by the overflow:hidden above, so it only
+   shows once the hover slides the pair up together.
+
+   The text is written out here rather than read from attr(data-text). No
+   markup ever carried that attribute, and attr() on a missing attribute
+   resolves to the empty string — the label rolled up and nothing rolled in
+   behind it, which is what blanked the button mid-hover. Spelling it out in
+   CSS also means a new page that forgets the attribute can't bring the bug
+   back; the tradeoff is that this string has to be kept in step with the
+   markup if the label ever changes. \2192 is the arrow (&rarr;), escaped so
+   the rendering does not depend on how this file's encoding is sniffed. */
 .get-in-touch-btn::after {
-    content: attr(data-text);
+    content: "GET IN TOUCH \2192";
     position: absolute;
     top: 100%;
     left: 0;
@@ -513,10 +530,7 @@ body {
     color: var(--cream-light);
 }
 
-.get-in-touch-btn:hover>span {
-    transform: translateY(-100%);
-}
-
+.get-in-touch-btn:hover>span,
 .get-in-touch-btn:hover::after {
     transform: translateY(-100%);
 }
@@ -678,15 +692,6 @@ body {
     align-items: center;
     gap: 1rem;
     margin-bottom: 2rem;
-}
-
-.connect-text {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.75rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    font-weight: 500;
-    color: var(--green-soft);
 }
 
 .social-links {

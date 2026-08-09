@@ -28,6 +28,11 @@ body {
     display: block;
     width: auto;
     height: 34px;
+    /* Pinned to the artwork's true ratio rather than inherited from whatever
+       pixel dimensions the file happens to have. 2400x587 does not survive
+       downscaling as a whole number, so the rounded file ratio would otherwise
+       move the centred lockup by a pixel. */
+    aspect-ratio: 2400 / 587;
 }
 
 .header .kg-logo img {
@@ -148,6 +153,9 @@ body {
     transform: scale(1.08);
     animation: kgHeroDrift 18s ease-in-out infinite alternate;
 }
+
+/* Set by kissago.js once the wall is off screen — see heroDrift(). */
+.kg-hero-wall.is-idle img { animation-play-state: paused; }
 
 .kg-hero-pane:nth-child(2) img { animation-delay: -4s; }
 .kg-hero-pane:nth-child(3) img { animation-delay: -8s; }
@@ -737,8 +745,12 @@ body {
 
 .projects-showcase .step-progress-track { background-color: rgba(43, 61, 45, 0.13); }
 
+/* Full height, scaled down to nothing — kissago.js paints this with scaleY on
+   every scrubbed frame, so it must not be sized by percentage height. */
 .projects-showcase .step-progress-fill {
-    height: 0%;
+    height: 100%;
+    transform: scaleY(0);
+    transform-origin: top center;
     background-color: var(--accent);
     transition: none;
 }
@@ -831,9 +843,12 @@ body {
     background-color: rgba(43, 61, 45, 0.16);
 }
 
+/* Full width, scaled down to nothing — kissago.js paints this with scaleX on
+   every scrubbed frame, so it must not be sized by percentage width. */
 .kg-process-fill {
     height: 100%;
-    width: 0;
+    width: 100%;
+    transform: scaleX(0);
     background-color: var(--accent);
     transform-origin: left center;
 }

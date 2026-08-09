@@ -257,6 +257,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const siteMainWrapper = document.getElementById('site-main-wrapper');
     const siteFooter = document.getElementById('site-footer');
     const footerInFlow = window.matchMedia('(max-width: 768px)');
+    // ScrollTrigger.refresh() re-measures every trigger on the page, so it is
+    // far too heavy to run once per resize event: dragging a window edge fires
+    // these continuously and each one stalls the frame. Coalesce to one refresh
+    // after the resize settles.
+    let refreshTimer = null;
+    function refreshTriggersSoon() {
+        if (typeof ScrollTrigger === 'undefined') return;
+        clearTimeout(refreshTimer);
+        refreshTimer = setTimeout(() => ScrollTrigger.refresh(), 150);
+    }
+
     function updateFooterMargin() {
         if (!siteMainWrapper || !siteFooter) return;
         // On phones the footer is position: static (normal flow) — no margin.
@@ -265,11 +276,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (siteMainWrapper.style.marginBottom !== value) {
             siteMainWrapper.style.marginBottom = value;
             // Content below shifted — ScrollTrigger must re-measure.
-            if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+            refreshTriggersSoon();
         }
     }
     window.addEventListener('load', updateFooterMargin);
-    window.addEventListener('resize', updateFooterMargin);
+    // The read below is a forced layout, so keep it off the resize event itself.
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(updateFooterMargin, 120);
+    });
     if (footerInFlow.addEventListener) footerInFlow.addEventListener('change', updateFooterMargin);
     updateFooterMargin();
     setTimeout(updateFooterMargin, 500);
