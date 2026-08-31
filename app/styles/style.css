@@ -1,8 +1,9 @@
-/* Keep this @import. It looks redundant against the <link> in each page's
-   <head>, which requests the same families and weights, but that <link> does
-   not always deliver them — removing this line dropped the site to fallback
-   serifs, which render far heavier than Cormorant Garamond. */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+/* The families are requested from the document head, in app/layout.tsx —
+   twice, deliberately. A single <link> did not always deliver them, and losing
+   them drops the site to fallback serifs, which render far heavier than
+   Cormorant Garamond. The @import that used to live here cannot do that job
+   any more: Turbopack strips remote @import rules out of bundled CSS, so the
+   second request is a second <link> in the head instead. */
 
 * {
     margin: 0;
@@ -237,7 +238,7 @@ body {
     width: 100vw;
     height: 100vh;
     height: 100dvh;
-    background-image: url('assets/hero/h01.jpg');
+    background-image: url('/assets/hero/h01.jpg');
     background-size: cover;
     background-position: center;
     display: flex;

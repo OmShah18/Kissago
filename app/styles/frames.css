@@ -1,0 +1,34 @@
+/* ==========================================================================
+   Selected frames — the photograph grid on the home page.
+
+   A tile wall rather than a card grid: three columns running the full width
+   of the section with no gutter at all, so the photographs meet edge to edge
+   and read as one block of images.
+
+   Only the grid is redefined here. Everything else a frame does — the hover
+   scale, the scrim, the viewer it opens — still comes from .kg-grid in
+   kissago.css, and the other pages' .kg-grid-4 sampler strips are untouched.
+   ========================================================================== */
+
+/* Both classes in every selector, so these win over .kg-grid's own responsive
+   rules on specificity rather than on the order the stylesheets happen to be
+   imported in. */
+.kg-grid.kg-tilegrid {
+    grid-template-columns: repeat(3, 1fr);
+    /* Flush. The gutter is what makes the default grid read as a set of
+       separate cards; without it the wall is a single surface. */
+    gap: 0;
+}
+
+/* Portrait 2:3 — a 35mm frame stood on end. The source photographs are 4:5,
+   so cover trims a little from either side; nothing is cut from the top or
+   bottom, where the subject usually is. */
+.kg-grid.kg-tilegrid figure {
+    aspect-ratio: 2 / 3;
+}
+
+/* Three columns of 2:3 get too narrow to read on a phone. Two columns keep
+   each frame a usable size, and twelve frames still fill whole rows. */
+@media (max-width: 900px) {
+    .kg-grid.kg-tilegrid { grid-template-columns: repeat(2, 1fr); }
+}

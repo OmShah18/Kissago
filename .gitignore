@@ -1,8 +1,11 @@
 # Original full-resolution uploads. The site serves the optimised copies in
-# assets/, generated from these — keep the originals locally, out of the repo.
+# public/assets/, generated from these — keep the originals locally, out of the repo.
 kissago images/
 kissago logo/
 
 node_modules/
+.next/
+next-env.d.ts
+out/
 .DS_Store
 Thumbs.db

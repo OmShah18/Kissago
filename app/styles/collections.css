@@ -1,0 +1,110 @@
+/* ==========================================================================
+   What we shoot — the two-column showcase.
+
+   The services run up the left half of the screen a viewport at a time while
+   one photograph holds the right half, changing as each service passes.
+
+   A modifier on .projects-showcase rather than an edit to style.css, so the
+   ported sheet stays as ported. The rail, the dots and the framed landscape
+   plate it used to carry are simply no longer in the markup, and their rules
+   there are now inert.
+   ========================================================================== */
+
+.projects-showcase.showcase-collections {
+    /* style.css sets `overflow: hidden` here, which would make this section the
+       scrollport for the sticky column inside it — the photograph would then
+       stick to the top of the section rather than the top of the screen.
+       `clip` on one axis with `visible` on the other keeps the horizontal
+       safety without creating a scroll container. */
+    overflow: visible;
+    overflow-x: clip;
+    padding: 0;
+}
+
+.showcase-stack {
+    display: grid;
+    /* Two equal halves of the viewport, no padding: the photograph runs to the
+       right edge of the screen, as it does on the reference. */
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+}
+
+/* ---- the photograph, held against the right half ---------------------- */
+
+.showcase-figures {
+    /* Both children occupy row 1: the steps column is the tall one, and this
+       sticks against it for the whole of its length. */
+    grid-area: 1 / 2;
+    position: sticky;
+    top: 24px;
+    height: calc(100vh - 48px);
+    height: calc(100dvh - 48px);
+    overflow: hidden;
+    /* Behind the photographs while they load, and behind the cross-fade. */
+    background-color: var(--accent-ink);
+}
+
+.showcase-figure {
+    position: absolute;
+    inset: 0;
+}
+
+/* Only the first is shown before the script runs — without this the last one
+   in the markup would sit on top of the stack until hydration. */
+.showcase-figure:not(:first-child) { opacity: 0; }
+
+.showcase-figure img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ---- the services, one screen each ------------------------------------ */
+
+.showcase-steps { grid-area: 1 / 1; }
+
+.showcase-step {
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 4vw;
+}
+
+.showcase-step h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2rem, 4.2vw, 3.9rem);
+    line-height: 0.85;
+    letter-spacing: normal;
+    text-transform: uppercase;
+    color: var(--green-deep);
+    margin: 0;
+}
+
+.showcase-step p {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: clamp(0.82rem, 0.97vw, 0.95rem);
+    line-height: 1.45;
+    color: var(--green-deep);
+    /* Narrow enough that the paragraph reads as a caption under the name
+       rather than as a column of body copy. */
+    max-width: 432px;
+    margin: 1.7rem 0 0;
+}
+
+.showcase-step .showcase-cta { margin-top: 2.2rem; }
+
+
+/* --------------------------------------------------------------------------
+   Narrow screens — the stacked cards in style.css take over, unchanged.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+    .showcase-stack { display: none; }
+}

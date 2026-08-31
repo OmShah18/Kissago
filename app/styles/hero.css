@@ -1,0 +1,347 @@
+/* ==========================================================================
+   Home hero + preloader.
+
+   Loaded after the three stylesheets carried over from the static site, and
+   deliberately kept apart from them: everything here is new work, and the
+   originals stay byte-for-byte what they were so the rest of the site cannot
+   drift. Where a rule below restates a selector from kissago.css it is an
+   intentional override, marked as such.
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   Preloader
+
+   A light ground with the count pinned to one edge, the unit to the other, and
+   the wordmark drawing itself in between them. The wordmark is a raster file
+   rather than line art, so it is revealed by a bottom-to-top wipe over a faint
+   ghost of itself — the same read as a stroke drawing in, without needing an
+   outline version of the logo.
+   -------------------------------------------------------------------------- */
+
+/* Overrides the green ground in style.css. */
+.preloader.kg-pre {
+    background-color: var(--bg);
+    display: block;
+    padding: 0;
+}
+
+.kg-pre-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(1.5rem, 4vw, 4.5rem);
+}
+
+/* ---- the count ---- */
+
+.kg-pre-count {
+    display: flex;
+    color: var(--accent);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(1.7rem, 2.7vw, 2.6rem);
+    line-height: 1;
+    /* Tabular figures keep the two columns from shifting width as they roll. */
+    font-variant-numeric: tabular-nums;
+}
+
+/* One column per digit. Each is a stack of the digits it will ever show, and
+   the whole stack slides so that exactly one sits in the window. */
+.kg-pre-digit {
+    height: 1em;
+    overflow: hidden;
+}
+
+.kg-pre-digit ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    transform: translateY(calc(var(--step, 0) * -1em));
+    transition: transform 0.62s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.kg-pre-digit li {
+    height: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0.62em;
+}
+
+.kg-pre-pct {
+    color: var(--green-warm);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(1.7rem, 2.7vw, 2.6rem);
+    line-height: 1;
+}
+
+/* ---- the wordmark ---- */
+
+.kg-pre-mark {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(170px, 26vw, 420px);
+}
+
+.kg-pre-mark img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+/* The faint full wordmark the drawn one fills in over. */
+.kg-pre-mark-ghost {
+    opacity: 0.16;
+}
+
+.kg-pre-mark-fill {
+    position: absolute;
+    inset: 0;
+    /* Driven from the counter's progress — 100% hides it, 0% is complete. */
+    clip-path: inset(calc(100% - var(--fill, 0%)) 0 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .kg-pre-digit ul { transition: none; }
+}
+
+
+/* --------------------------------------------------------------------------
+   Hero
+
+   Two and a bit viewports tall. The footage is stuck to the top of the
+   viewport for the whole of it while the wordmark, the introduction and the
+   featured story travel up over it — so the hero is read by scrolling through
+   it rather than by looking at one frame of it.
+   -------------------------------------------------------------------------- */
+
+/* Overrides the 100vh flex box in kissago.css. */
+.kg-hero.kg-hero-tall {
+    height: 230vh;
+    min-height: 0;
+    display: block;
+    overflow: visible;
+    /* Matches the preloader ground, so the footage expanding out of it at load
+       reads as one continuous movement rather than a cut to a dark stage. */
+    background-color: var(--bg);
+}
+
+/* The section-wide scrim in kissago.css would cover all 230vh; the tall hero
+   carries its own inside the sticky frame instead. */
+.kg-hero.kg-hero-tall::after { display: none; }
+
+.kg-hero-media {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    background-color: var(--accent-ink);
+    /* The opening expansion drives these two numbers rather than the whole
+       clip-path string. A symmetric inset() always reports back from computed
+       style in its collapsed two-value form, which leaves an animation library
+       two numbers to interpolate against a four-value target; a custom property
+       holds exactly what it was given. Defaults are full-bleed, so the frame is
+       correct for anyone the animation never runs for. */
+    --kg-clip-y: 0%;
+    --kg-clip-x: 0%;
+    clip-path: inset(var(--kg-clip-y) var(--kg-clip-x) var(--kg-clip-y) var(--kg-clip-x));
+    will-change: clip-path;
+}
+
+.kg-hero-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.35);
+}
+
+/* Sits over the sticky frame for the section's whole height. Laid out as three
+   bands: the wordmark holds the first viewport, the introduction takes the
+   middle, and the featured story closes it out. */
+.kg-hero-stage {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    padding: 0 clamp(1.5rem, 4vw, 4.5rem);
+    /* Only the links inside want pointer events — the rest must let clicks
+       through to the page. */
+    pointer-events: none;
+}
+
+.kg-hero-stage a { pointer-events: auto; }
+
+.kg-hero-headline {
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ---- the wordmark ---- */
+
+/* Overrides kissago.css, which centres a single text node. The letters are now
+   separate boxes so each can be masked on its own. */
+.kg-hero-tall .kg-hero-title {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.kg-hero-letter {
+    display: inline-block;
+    overflow: hidden;
+    /* Bodoni's round capitals overshoot the cap line top and bottom; without
+       this padding the mask would shave them. The negative margin takes the
+       space back so the line box is unchanged. */
+    padding: 0.1em 0 0.14em;
+    margin: -0.1em 0 -0.14em;
+}
+
+.kg-hero-letter > span {
+    display: block;
+    will-change: transform;
+}
+
+/* ---- introduction ---- */
+
+.kg-hero-intro {
+    flex: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 15vw) minmax(0, 1fr);
+    align-content: center;
+    align-items: center;
+    gap: clamp(1.8rem, 4vw, 4rem);
+    padding-bottom: 4vh;
+}
+
+.kg-hero-intro-fig {
+    margin: 0;
+    overflow: hidden;
+}
+
+.kg-hero-intro-fig img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+}
+
+.kg-hero-intro-text p {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(1.5rem, 3.4vw, 3.4rem);
+    line-height: 1.12;
+    color: #fbfbf4;
+    max-width: 22ch;
+    margin: 0;
+    text-shadow: 0 2px 20px rgba(18, 27, 20, 0.3);
+}
+
+/* A pill rather than the site's square kg-btn: it belongs to the footage, not
+   to the cream sections below, and the softer shape reads as an overlay. */
+.kg-hero-pill {
+    display: inline-block;
+    margin-top: clamp(1.2rem, 2.4vw, 2.2rem);
+    padding: 0.85em 2.1em;
+    border: 1px solid rgba(251, 251, 244, 0.65);
+    border-radius: 999px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(0.72rem, 0.9vw, 0.85rem);
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fbfbf4;
+    text-decoration: none;
+    background: transparent;
+    transition: background-color 0.5s var(--ease-out-expo),
+                color 0.5s var(--ease-out-expo),
+                border-color 0.5s var(--ease-out-expo);
+}
+
+.kg-hero-pill:hover {
+    background-color: #fbfbf4;
+    border-color: #fbfbf4;
+    color: var(--accent);
+}
+
+/* ---- featured story ---- */
+
+.kg-hero-feature {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding: 0 0 clamp(1.6rem, 3.5vh, 3rem);
+    text-decoration: none;
+    color: #fbfbf4;
+    border-top: 1px solid rgba(251, 251, 244, 0.28);
+    padding-top: clamp(1rem, 2vh, 1.6rem);
+}
+
+.kg-hero-feature p {
+    margin: 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2vw, 1.9rem);
+    font-weight: 400;
+}
+
+.kg-hero-feature span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(0.68rem, 0.85vw, 0.8rem);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    transition: opacity 0.4s var(--ease-out-expo);
+}
+
+.kg-hero-feature:hover span { opacity: 1; }
+
+
+/* --------------------------------------------------------------------------
+   Narrow screens
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+    .kg-hero.kg-hero-tall { height: 200vh; }
+
+    .kg-hero-intro {
+        grid-template-columns: minmax(0, 1fr);
+        gap: clamp(1.2rem, 3vw, 2rem);
+    }
+
+    /* The inset frame costs a third of the band on a phone and earns little;
+       the copy and the invitation are what matter here. */
+    .kg-hero-intro-fig { display: none; }
+
+    .kg-hero-intro-text p { max-width: none; }
+}
+
+@media (max-width: 560px) {
+    .kg-hero-feature span { letter-spacing: 0.12em; }
+}
+
+
+/* --------------------------------------------------------------------------
+   Reduced motion
+
+   No opening expansion and no masked letters — the hero is simply there. The
+   scroll-through still works, because it is the page scrolling and not an
+   animation.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .kg-hero-media { clip-path: none; }
+    .kg-hero-letter > span { transform: none !important; }
+}

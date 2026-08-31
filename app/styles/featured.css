@@ -1,0 +1,233 @@
+/* ==========================================================================
+   Featured weddings.
+
+   Not a row of cards: three frames per wedding scattered across the page, each
+   drifting at its own speed, with the couple's name held at the vertical centre
+   of the screen — first name against the left edge, the ampersand in the
+   middle, second name against the right — swapping to the next couple as you
+   reach them.
+
+   Geometry comes from data/featured.ts as inline vw values, so this file only
+   carries the things that do not vary per frame.
+   ========================================================================== */
+
+.kg-featured {
+    position: relative;
+    background-color: var(--bg);
+    padding: clamp(6rem, 16vw, 20rem) 0 clamp(5rem, 12vw, 16rem);
+    /* clip, not hidden. `hidden` would make this section the scrollport for the
+       sticky name below, which then has nothing to stick against and sits at
+       the top of the section instead of the middle of the screen. `clip` keeps
+       the horizontal safety without creating a scroll container, and leaving
+       the vertical axis visible lets a block's trailing frame hang into the
+       gap below it, which the composition relies on. */
+    overflow-x: clip;
+}
+
+/* ---- the name held at the centre of the screen ---------------------------
+   Sticky with a negative margin so it takes no space in the flow: the blocks
+   below scroll past it rather than after it. It sits behind the frames — the
+   name passing under a photograph is part of the effect. */
+
+.kg-featured-names {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100dvh;
+    margin-bottom: -100vh;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    padding: 0 clamp(1.5rem, 2.08vw, 2rem);
+}
+
+.kg-featured-name {
+    position: absolute;
+    left: clamp(1.5rem, 2.08vw, 2rem);
+    right: clamp(1.5rem, 2.08vw, 2rem);
+    display: flex;
+    align-items: baseline;
+    /* Left, centre, right in one move. */
+    justify-content: space-between;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(1.5rem, 2.45vw, 2.6rem);
+    line-height: 1.1;
+    color: var(--accent);
+    white-space: nowrap;
+}
+
+.kg-featured-name span {
+    display: inline-flex;
+}
+
+/* One box per letter so the name can be swapped a letter at a time. */
+.kg-featured-letter {
+    display: inline-block;
+    overflow: hidden;
+    padding: 0.12em 0 0.16em;
+    margin: -0.12em 0 -0.16em;
+}
+
+.kg-featured-letter > span {
+    display: block;
+    will-change: transform;
+}
+
+/* A space between words still needs to occupy its width inside a mask. */
+.kg-featured-letter.is-space { width: 0.28em; }
+
+/* ---- the blocks ---- */
+
+.kg-featured-blocks {
+    position: relative;
+    z-index: 1;
+}
+
+.kg-featured-block {
+    position: relative;
+    /* height and margin-bottom come from the layout data */
+}
+
+.kg-featured-frame {
+    position: absolute;
+    display: block;
+    overflow: hidden;
+    text-decoration: none;
+    /* left, top and width come from the layout data */
+}
+
+.kg-featured-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 1.1s var(--ease-out-expo);
+}
+
+.kg-featured-frame:hover img { transform: scale(1.045); }
+
+/* Named, so a frame is not an unlabelled link for anyone not looking at it. */
+.kg-featured-frame-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+/* ---- the bar at the foot of the section ---- */
+
+.kg-featured-bar {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    margin-top: clamp(4rem, 10vw, 12rem);
+}
+
+.kg-featured-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 1.05rem 1.05rem 1.05rem 2rem;
+    border-radius: 999px;
+    background-color: #fbfbf4;
+    box-shadow: 0 10px 40px rgba(43, 61, 45, 0.1);
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(0.8rem, 1vw, 0.95rem);
+    color: var(--accent);
+    text-decoration: none;
+    transition: box-shadow 0.5s var(--ease-out-expo), transform 0.5s var(--ease-out-expo);
+}
+
+.kg-featured-bar:hover .kg-featured-pill {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 50px rgba(43, 61, 45, 0.16);
+}
+
+.kg-featured-pill sup {
+    font-size: 0.62em;
+    margin-left: 0.15em;
+    color: var(--green-warm);
+}
+
+.kg-featured-pill-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    border-radius: 50%;
+    background-color: var(--accent);
+    color: var(--bg);
+    flex: none;
+}
+
+
+/* --------------------------------------------------------------------------
+   Narrow screens
+
+   The scatter needs width to read. Below 900px the frames stack into a plain
+   column and the name sits above its own set rather than floating over them.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+    .kg-featured { padding: clamp(4rem, 12vw, 8rem) 1.5rem clamp(3rem, 8vw, 6rem); }
+
+    .kg-featured-names { display: none; }
+
+    /* The layout data sets height, top, left and width inline for the scatter;
+       all of it has to go for the stacked version, hence the !important. */
+    .kg-featured-block {
+        height: auto !important;
+        margin-bottom: clamp(3rem, 10vw, 5rem) !important;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .kg-featured-frame {
+        position: static !important;
+        left: auto !important;
+        top: auto !important;
+        width: 100% !important;
+    }
+
+    /* The lead frame keeps its prominence; the other two pair up beneath it.
+       first-of-type, not first-child — the block's heading comes first. */
+    .kg-featured-block .kg-featured-frame:first-of-type {
+        grid-column: 1 / -1;
+    }
+
+    /* Shown per block on phones, where the floating name is switched off. */
+    .kg-featured-block-name {
+        grid-column: 1 / -1;
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 300;
+        font-size: clamp(1.4rem, 6vw, 2rem);
+        color: var(--accent);
+        margin: 0 0 0.4rem;
+    }
+}
+
+@media (min-width: 901px) {
+    .kg-featured-block-name {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+    }
+}
+
+
+/* --------------------------------------------------------------------------
+   Reduced motion — no drift, no letter swapping. The composition is static.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .kg-featured-frame img { transition: none; }
+    .kg-featured-letter > span { transform: none !important; }
+}
