@@ -26,6 +26,12 @@
     padding: 0;
 }
 
+/* The preloader plays once per session. On every load after that the inline
+   script in app/layout.tsx has already marked the document, so this hides the
+   overlay from the very first paint — React unmounting it a tick later would
+   be a tick too late to avoid a flash of cream. */
+.kg-returning .preloader.kg-pre { display: none; }
+
 .kg-pre-inner {
     position: absolute;
     inset: 0;
@@ -197,6 +203,34 @@
     justify-content: center;
     align-items: flex-end;
     width: 100%;
+
+    /* Bodoni Moda is a didone: its thin strokes are hairlines by design, and
+       both of the things that make them thinner were stacked here. Weight was
+       at the bottom of the range, and `font-optical-sizing: auto` ties opsz to
+       the font-size — at 18.5vw that asks for the 96pt display cut, which is
+       drawn with the finest hairlines of any size on the axis. Over footage,
+       those hairlines all but disappeared.
+
+       So: more weight, and an optical size held down near text sizes, where
+       the same face is cut for ink rather than for elegance. */
+    font-weight: 600;
+    font-optical-sizing: none;
+    font-variation-settings: 'opsz' 20, 'wght' 600;
+
+    /* Heavier letters are wider ones — about 5.6% here — and the old 18.5vw
+       already set the word to very nearly the full line. Past that the letters
+       are flex items with nowhere to go, so they shrink, and each one clips its
+       own glyph against the mask that makes the reveal work: the trimming is
+       silent, and it eats the serifs first. Scaled down by the amount the
+       weight added, so the word ends up occupying the width it always did. */
+    font-size: clamp(2.4rem, 17.5vw, 25rem);
+}
+
+/* Below 600px the stage's side padding stops tracking the viewport and pins at
+   24px, so the line it has to fit into stops shrinking with the screen while
+   17.5vw carries on. A little less again keeps the word inside it. */
+@media (max-width: 600px) {
+    .kg-hero-tall .kg-hero-title { font-size: clamp(2.4rem, 16vw, 25rem); }
 }
 
 .kg-hero-letter {

@@ -169,23 +169,30 @@
 /* --------------------------------------------------------------------------
    Narrow screens
 
-   The scatter needs width to read. Below 900px the frames stack into a plain
-   column and the name sits above its own set rather than floating over them.
+   The scatter needs width to read, so below 900px it gives way to the
+   arrangement the reference uses on a phone: one photograph per couple, near
+   enough the full width of the screen, with the couple's name centred directly
+   beneath it. No second or third frame, no parallax, no floating name — a
+   single column, read one couple at a time.
    -------------------------------------------------------------------------- */
 
 @media (max-width: 900px) {
-    .kg-featured { padding: clamp(4rem, 12vw, 8rem) 1.5rem clamp(3rem, 8vw, 6rem); }
+    .kg-featured { padding: clamp(4rem, 12vw, 8rem) 15px clamp(3rem, 8vw, 6rem); }
 
+    /* The name that floats over the frames on a wide screen. */
     .kg-featured-names { display: none; }
 
     /* The layout data sets height, top, left and width inline for the scatter;
-       all of it has to go for the stacked version, hence the !important. */
+       all of it has to go for the stacked version, hence the !important.
+
+       A column rather than the source order: the heading is written before the
+       frames so it reads first without styling, and here it has to sit under
+       the photograph it belongs to. */
     .kg-featured-block {
         height: auto !important;
-        margin-bottom: clamp(3rem, 10vw, 5rem) !important;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
+        margin-bottom: 0 !important;
+        display: flex;
+        flex-direction: column;
     }
 
     .kg-featured-frame {
@@ -193,22 +200,49 @@
         left: auto !important;
         top: auto !important;
         width: 100% !important;
+        order: 1;
+        /* The reference's 360x456. The photographs are cut to 0.787, so this
+           crops a hair off the height and nothing off the sides. */
+        aspect-ratio: 360 / 456;
     }
 
-    /* The lead frame keeps its prominence; the other two pair up beneath it.
-       first-of-type, not first-child — the block's heading comes first. */
-    .kg-featured-block .kg-featured-frame:first-of-type {
-        grid-column: 1 / -1;
+    .kg-featured-frame img {
+        height: 100%;
+        object-fit: cover;
     }
 
-    /* Shown per block on phones, where the floating name is switched off. */
+    /* Nothing here moves. The reference's phone layout is a plain column of
+       photographs, and the drift is already off below this width — but the
+       frames are links, and a touch screen latches :hover on tap, so the zoom
+       meant for a mouse fires when someone opens a wedding and is still
+       running underneath the page they land on. Off on both counts. */
+    .kg-featured-frame img,
+    .kg-featured-pill { transition: none; }
+
+    .kg-featured-frame:hover img,
+    .kg-featured-bar:hover .kg-featured-pill {
+        transform: none;
+    }
+
+    .kg-featured-bar:hover .kg-featured-pill {
+        box-shadow: 0 10px 40px rgba(43, 61, 45, 0.1);
+    }
+
+    /* One photograph per couple. The other two are what the scatter is for. */
+    .kg-featured-block .kg-featured-frame:not(:first-of-type) { display: none; }
+
+    /* Directly under its photograph — the reference leaves no gap above the
+       name at all, and the whole of the space before the next couple below
+       it. */
     .kg-featured-block-name {
-        grid-column: 1 / -1;
+        order: 2;
+        text-align: center;
         font-family: 'Cormorant Garamond', serif;
-        font-weight: 300;
-        font-size: clamp(1.4rem, 6vw, 2rem);
+        font-weight: 400;
+        font-size: clamp(1.35rem, 6.7vw, 1.9rem);
+        line-height: 1.15;
         color: var(--accent);
-        margin: 0 0 0.4rem;
+        margin: 0 0 clamp(3rem, 19.7vw, 6rem);
     }
 }
 

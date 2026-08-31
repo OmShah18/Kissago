@@ -29,10 +29,25 @@ export function startSmoothScroll(): () => void {
 
     if (!lenis && !prefersReducedMotion()) {
         lenis = new Lenis({
-            duration: 1.2,
+            // How long a scroll input takes to settle. Longer than the usual
+            // 1.2: the pages are built out of full-height moments — the hero,
+            // each service, each wedding — and a scroll that arrives quickly
+            // makes them flick past. This lets each one carry you into the
+            // next instead.
+            duration: 1.6,
+            // Deep ease-out. Nearly all the distance is covered early and the
+            // tail is long, which is what makes the page feel like it is
+            // coming to rest rather than stopping.
             easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            // The other half of "too fast": distance per notch, not just the
+            // time it takes. Slightly under 1 asks for a little more intent
+            // from the reader without turning the wheel sluggish.
+            wheelMultiplier: 0.8,
             orientation: 'vertical',
             smoothWheel: true,
+            // Touch is left alone deliberately. Damping a finger drag breaks
+            // the one-to-one contract a touchscreen makes, and reads as lag
+            // rather than as polish.
         });
         lenis.on('scroll', ScrollTrigger.update);
         gsap.ticker.add(tick);

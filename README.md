@@ -24,8 +24,9 @@ app/
   styles/              style.css, inner-style.css, kissago.css — unchanged from
                        the static site, and the source of truth for every
                        colour, size and transition on the page.
-                       hero.css, featured.css, frames.css and collections.css
-                       are new work, kept separate so those three cannot drift
+                       hero.css, featured.css, frames.css, collections.css and
+                       footer.css are new work, kept separate so those three
+                       cannot drift
 components/
   site/                the chrome each route sits inside: transition curtain,
                        header, menu overlay, parallax footer, photograph viewer
@@ -54,6 +55,31 @@ runs child effects before parent ones, so registering from the shell would
 happen after the page below it had already tried to create its ScrollTriggers.
 Import GSAP from `@/lib/gsap`, never from `gsap` directly.
 
+## The preloader
+
+It plays once per tab session and then gets out of the way: the first arrival
+anywhere on the site claims the visit, and every load after that — a reload of
+the home page, or reaching it from another route — goes straight to the hero.
+
+Two halves keep that honest. `lib/preloader-state.ts` holds the flag in
+`sessionStorage`; only the preloader may `claimFirstVisit()`, and the routes
+without one call `markSiteVisited()` instead, so no route both reads and writes
+and nothing depends on the order React runs effects in. And because the overlay
+is in the prerendered HTML, an inline script in `app/layout.tsx` marks the
+document before the first paint so `hero.css` can hide it — React unmounting it
+a tick later would be a tick too late to avoid a flash of cream.
+
+The hero's own entrance still plays either way. It just has nothing in front of
+it the second time.
+
+## Scroll
+
+`lib/smooth-scroll.ts` runs Lenis at `duration: 1.6` with `wheelMultiplier:
+0.8` — longer to settle and a little less ground per notch. The pages are built
+out of full-height moments, and at the usual 1.2 with no multiplier they flicked
+past. Touch is deliberately left native: damping a finger drag reads as lag, not
+as polish.
+
 ## The home hero
 
 `components/sections/Hero.tsx` is 230vh tall. The footage is `position: sticky`
@@ -65,6 +91,15 @@ than on mount — starting at mount would play it behind the preloader, where
 nobody sees it. The frame expands out of the small centred panel the preloader
 leaves behind while the letters are already rising into it, so the two read as
 one movement.
+
+The wordmark is Bodoni Moda at `wght` 600 with `opsz` pinned to 20. Left to
+itself, `font-optical-sizing: auto` ties opsz to the font-size, and at this size
+that asks for the 96pt display cut — the finest hairlines on the axis, which
+disappeared over the footage. Both of those override `kissago.css`, along with
+a smaller `font-size`: heavier letters are wider ones, and the word was already
+set to nearly the full line. Past that the letters are flex items with nowhere
+to go, so they shrink and clip their own glyphs against the masks that make the
+reveal work — silently, serifs first. `hero.css` has the numbers.
 
 The expansion drives `--kg-clip-y` / `--kg-clip-x` rather than a whole
 `clip-path` string. A symmetric `inset()` always reports back from computed
@@ -86,6 +121,18 @@ lets one turn into another rather than cut.
 `.kg-featured` uses `overflow-x: clip`, never `hidden`: `hidden` would make the
 section the scrollport for the sticky name inside it, which would then sit at
 the top of the section instead of the middle of the screen.
+
+The scatter needs width to read, so below 900px it gives way to what the
+reference does on a phone: one photograph per couple at 360x456 with 15px
+gutters, and the couple's name centred directly beneath it — no second or third
+frame, no drift, no floating name. The block becomes a flex column so the name
+can sit under its photograph: the heading is written before the frames so the
+markup reads correctly unstyled, and `order` puts it back.
+
+Nothing there moves at all. The drift is off below that width anyway, but the
+frames are links and a touch screen latches `:hover` on tap, so the zoom meant
+for a mouse fired whenever someone opened a wedding. It and the pill's lift are
+switched off with it.
 
 ## Selected frames
 
@@ -114,6 +161,36 @@ That sheet has to undo `style.css`'s `overflow: hidden` on the section, for the
 same reason the featured section avoids it: it would make the section the
 scrollport for the sticky column inside it.
 
+Below 768px it is the same arrangement turned through ninety degrees: the
+photograph holds the top of the screen and the services pass underneath it and
+away behind it. Dropping the grid is all that takes — in normal flow the two
+fall into DOM order, photograph first, and `grid-area` stops applying, so the
+markup is identical at both sizes and the stacked cards are gone.
+
+The reveal changes with it. Wide screens dissolve one photograph into the next;
+narrow ones use the reference's: the arriving photograph opens out of nothing
+at the centre of the one it replaces, which stays put underneath until it is
+covered. Nothing fades — the growing image does the hiding. That needs a
+`z-index`, because the order they arrive in is not the order they sit in the
+markup: scrolling back up brings an earlier one forward, so a rising counter
+puts whichever arrived last on top.
+
+Three things that box needs on a phone. It is opaque and runs to all three
+edges with the inset as padding, not a margin, or the outgoing service shows
+through the gap above it on its way past. It needs a `z-index`: it comes first
+in flow, so without one every block after it paints over the picture instead of
+disappearing behind it. And it keeps a plain `margin: 0`.
+
+That last one is worth the words. Each service reserves the picture's height
+with its own `padding-top`, so it is tempting to pull the box out of the flow
+with a negative `margin-bottom` and stop paying for that height twice. Doing so
+breaks the release: sticky is clamped by the element's *margin* box, so a
+bottom margin of minus its own height lets it stay glued until its top — not
+its bottom — reaches the end of the section, and the closing panel then slides
+up underneath the photograph instead of after it. The box stays in the flow and
+the first service alone drops the padding, its `min-height` shortened to match
+so the one-service-per-screen rhythm still starts at the first one.
+
 ## Photographs
 
 Each frame exists twice: `name.jpg` at 900px for the grid and `name-lg.jpg` at
@@ -124,8 +201,21 @@ optimised set was generated from.
 Grids use plain `<img>` rather than `next/image` — the files are already sized
 for their two uses, so the optimiser has nothing to add.
 
+## Footer
+
+`app/styles/footer.css` puts a painted botanical behind the footer, tinted with
+a scrim in `--accent-ink` so the cream text stays clear of the lighter passages
+between the leaves. Longhands only — the `background` shorthand would clear the
+colour `style.css` and `kissago.css` set, and that colour is the fallback if
+the file ever 404s.
+
 ## Type
 
-Cormorant Garamond, DM Sans and Bodoni Moda are requested from Google Fonts in
-`app/layout.tsx`, deliberately twice. See the comment there before removing
-either request.
+Cormorant Garamond, DM Sans, Bodoni Moda and Courier Prime come from Google
+Fonts in `app/layout.tsx`; Boska and Satoshi from Fontshare, one request per
+family because it only honours the first `f[]` in a URL. The first two families
+are requested twice on purpose — see the comment there before removing either
+request.
+
+Nothing sets Boska, Satoshi or Courier Prime yet, so no browser downloads their
+faces; they cost three stylesheet requests until something names them.

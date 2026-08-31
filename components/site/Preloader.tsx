@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { markPreloaderDone, resetPreloader } from '@/lib/preloader-state';
+import { claimFirstVisit, markPreloaderDone, resetPreloader } from '@/lib/preloader-state';
 import { SITE } from '@/data/site';
 
 /**
@@ -20,9 +20,11 @@ const STEPS = TENS.length;
  * The brand moment on the home page: the wordmark drawing itself in between
  * the count and its unit, on the studio's cream ground.
  *
- * Full length on first arrival, a quick pass when navigating back — the visit
- * is remembered for the tab, so a reload during the same session does not sit
- * through the whole thing again.
+ * It is the door into the site, so it plays once and then gets out of the way:
+ * the first arrival in a tab sees it in full, and every load after that — a
+ * reload, or reaching the home page from another route — goes straight to the
+ * hero. The hero's own entrance still plays either way; it just has nothing in
+ * front of it the second time.
  */
 export function Preloader() {
     const [step, setStep] = useState(0);
@@ -34,23 +36,18 @@ export function Preloader() {
     useEffect(() => {
         resetPreloader();
 
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        // Already been here this session, or motion is unwelcome: release the
+        // hero at once and never paint the overlay. The stylesheet has kept it
+        // hidden since before the first frame, so there is nothing to remove.
+        if (!claimFirstVisit() || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             setGone(true);
             markPreloaderDone();
             return;
         }
 
-        let returning = false;
-        try {
-            returning = !!sessionStorage.getItem('kg-visited');
-            sessionStorage.setItem('kg-visited', '1');
-        } catch {
-            /* storage unavailable */
-        }
-
         document.body.classList.add('preloader-active');
 
-        const duration = returning ? 600 : 2200;
+        const duration = 2200;
         const start = performance.now();
         let finishTimer: ReturnType<typeof setTimeout>;
         let removeTimer: ReturnType<typeof setTimeout>;
@@ -70,16 +67,15 @@ export function Preloader() {
                 frame.current = requestAnimationFrame(tick);
                 return;
             }
-            finishTimer = setTimeout(
-                () => {
-                    setDone(true);
-                    document.body.classList.remove('preloader-active');
-                    markPreloaderDone();
-                    // Matches the 0.6s fade in the stylesheet, plus a beat.
-                    removeTimer = setTimeout(() => setGone(true), 700);
-                },
-                returning ? 150 : 380,
-            );
+            // A beat on the finished count before the ground lifts, so it
+            // reads as landing rather than as being cut off.
+            finishTimer = setTimeout(() => {
+                setDone(true);
+                document.body.classList.remove('preloader-active');
+                markPreloaderDone();
+                // Matches the 0.6s fade in the stylesheet, plus a beat.
+                removeTimer = setTimeout(() => setGone(true), 700);
+            }, 380);
         }
         frame.current = requestAnimationFrame(tick);
 

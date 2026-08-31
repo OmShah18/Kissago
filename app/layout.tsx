@@ -10,11 +10,23 @@ import './styles/hero.css';
 import './styles/featured.css';
 import './styles/frames.css';
 import './styles/collections.css';
+import './styles/footer.css';
 import 'lenis/dist/lenis.css';
 
-/** Every family and weight the stylesheets name. */
+/** Every family and weight the stylesheets name, plus Courier Prime. */
 const FONTS_ALL =
-    'https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap';
+    'https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400..700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Courier+Prime:ital,wght@0,400;1,400&family=DM+Sans:wght@300;400;500;600&display=swap';
+
+/** Fontshare, one request per family: it only honours the first `f[]` in a
+ *  URL, so asking for both in one request silently drops the second. */
+const FONT_BOSKA = 'https://api.fontshare.com/v2/css?f[]=boska@1,2&display=swap';
+const FONT_SATOSHI = 'https://api.fontshare.com/v2/css?f[]=satoshi@1,2&display=swap';
+
+/** Runs before the first paint. Keep it to one statement that cannot throw —
+ *  it blocks the parser. The key matches `VISIT_KEY` in lib/preloader-state.ts
+ *  and the class matches `RETURNING_CLASS`. */
+const RETURNING_SCRIPT =
+    "try{if(sessionStorage.getItem('kg-visited'))document.documentElement.classList.add('kg-returning')}catch(e){}";
 
 /** The two text families again, on their own. This looks redundant against the
  *  request above — it asks for the same faces — but the single request did not
@@ -47,12 +59,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <head>
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+                <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="" />
                 {/* The showreel's player is fetched from YouTube once the hero
                     is on screen; warming the connection saves a round trip at
                     the moment it is needed. */}
                 <link rel="preconnect" href="https://www.youtube.com" />
                 <link href={FONTS_ALL} rel="stylesheet" />
                 <link href={FONTS_TEXT} rel="stylesheet" />
+                <link href={FONT_BOSKA} rel="stylesheet" />
+                <link href={FONT_SATOSHI} rel="stylesheet" />
+                {/* The preloader is in the prerendered HTML, so on a return
+                    visit it would paint for the frame or two before React can
+                    take it away. This marks the document before the first
+                    paint instead, and the stylesheet keeps it hidden. Inline
+                    and blocking on purpose: a deferred script would be too
+                    late to be worth running. */}
+                <script dangerouslySetInnerHTML={{ __html: RETURNING_SCRIPT }} />
             </head>
             <body>
                 <SiteShell>{children}</SiteShell>

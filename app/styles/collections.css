@@ -102,9 +102,101 @@
 
 
 /* --------------------------------------------------------------------------
-   Narrow screens — the stacked cards in style.css take over, unchanged.
+   Narrow screens
+
+   The same arrangement turned through ninety degrees: the photograph holds the
+   top of the screen and the services pass underneath it, each one rising from
+   the bottom edge and then sliding away behind the picture.
+
+   Dropping the grid is all it takes to reorder them — in normal flow the two
+   fall into DOM order, photograph first, and `grid-area` stops applying. The
+   markup is untouched.
    -------------------------------------------------------------------------- */
 
 @media (max-width: 768px) {
-    .showcase-stack { display: none; }
+    .showcase-stack {
+        display: block;
+        /* The height of the plate at the top of the screen. Named once: the
+           photograph is sized by it, and every service is pushed clear of it
+           by the same amount. */
+        --kg-plate: min(100vw, 64vh);
+    }
+
+    .showcase-figures {
+        /* The site header is absolutely positioned rather than fixed, so it
+           scrolls away and there is nothing up here to clear.
+
+           The box runs to all three edges and the inset is padding, not a
+           margin: the photograph needs a plate around it, and that plate has
+           to be opaque. A margin would leave a gap at the top for the
+           outgoing service to show through on its way past. */
+        top: 0;
+        /* In the flow, at its natural height. A negative margin here would
+           cost nothing in layout but wreck the release: sticky is clamped by
+           the element's MARGIN box, so pulling the bottom up by the plate's
+           own height lets it stay glued until its top — not its bottom —
+           reaches the end of the section, and the panel below then slides up
+           underneath the photograph instead of after it. The first service
+           takes the offset off its own padding instead. */
+        margin: 0;
+        padding: 0.75rem;
+        background-color: var(--cream);
+        /* Square on a phone held upright. The cap is for a phone on its side,
+           where a square would be taller than the screen. */
+        height: var(--kg-plate);
+        /* Above the services, not below them. In flow the photograph comes
+           first and would otherwise be painted over by every block after it;
+           a service is meant to slide up and disappear behind the picture. */
+        z-index: 2;
+    }
+
+    .showcase-figure { inset: 0.75rem; }
+
+    .showcase-steps {
+        display: block;
+        position: relative;
+        z-index: 1;
+    }
+
+    .showcase-step {
+        /* The service sits directly under the photograph, not at the foot of
+           its block: it is already there to read when the section arrives, and
+           scrolling carries it up and away behind the picture rather than
+           fetching it from below the fold. */
+        height: auto;
+        justify-content: flex-start;
+        padding: calc(var(--kg-plate) + 1.4rem) 10vw 6vh;
+        /* A floor, so a service with little to say still clears the screen
+           before the next one comes up behind it. On a phone the padding and
+           the copy already exceed this; it is here for the short ones. */
+        min-height: 79vh;
+        min-height: 79dvh;
+    }
+
+    /* The first service is the exception: the photograph sits above it in the
+       flow, so the space is already there and reserving it again would push
+       the copy a screen down. Its block is shorter by the same amount, which
+       is what keeps one service per screen from the very first one. */
+    .showcase-step:first-child {
+        padding-top: 1.4rem;
+        min-height: calc(79vh - var(--kg-plate));
+        min-height: calc(79dvh - var(--kg-plate));
+    }
+
+    .showcase-step h2 {
+        /* 9vw lands on the reference's 35px at phone widths. */
+        font-size: clamp(1.6rem, 9vw, 2.6rem);
+        line-height: 0.95;
+    }
+
+    .showcase-step p {
+        font-size: 0.875rem;
+        line-height: 1.36;
+        margin-top: 1.3rem;
+        /* Wider than the desktop measure in absolute terms is still narrower
+           than the screen; this matches the reference's ~76%. */
+        max-width: 100%;
+    }
+
+    .showcase-step .showcase-cta { margin-top: 1.6rem; }
 }

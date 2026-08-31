@@ -1,0 +1,25 @@
+/* ==========================================================================
+   Footer background.
+
+   A painted botanical behind the footer instead of flat green. The photograph
+   is already close to the palette, so it needs very little help to sit with
+   the rest of the site — a scrim in --accent-ink is there to hold the cream
+   text off the lighter passages between the leaves, not to change the colour.
+
+   A modifier file rather than an edit to style.css or kissago.css, which stay
+   as ported. Longhands only: the `background` shorthand would clear the
+   colour those sheets set, and that colour is what shows if the file 404s.
+   ========================================================================== */
+
+.site-footer {
+    background-color: var(--accent);
+    background-image:
+        linear-gradient(rgba(29, 42, 31, 0.66), rgba(29, 42, 31, 0.66)),
+        url('/assets/footer/botanical.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    /* The source is 1103x733 and the footer is wider than that on most
+       screens. Cover rather than tile: it is a painting, and a repeat would
+       show its seams where a little softness will not be noticed. */
+    background-size: cover;
+}

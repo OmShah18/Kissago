@@ -12,6 +12,7 @@ import { MenuOverlay } from './MenuOverlay';
 import { Footer, useFooterParallax } from './Footer';
 import { PageEffects } from './PageEffects';
 import { Preloader } from './Preloader';
+import { markSiteVisited } from '@/lib/preloader-state';
 
 /** The chrome every route sits inside: the transition curtain, the header and
  *  menu, the parallax footer and the photograph viewer. */
@@ -36,6 +37,14 @@ function Shell({ children }: { children: ReactNode }) {
     const solidHeader = pathname === '/contact';
 
     useEffect(() => startSmoothScroll(), []);
+
+    // Landing on any other route still counts as having arrived at the site,
+    // so reaching the home page afterwards does not play the preloader as
+    // though the tab had just been opened. Only the preloader itself claims
+    // the visit on the home page — no route both reads and writes the flag.
+    useEffect(() => {
+        if (!isHome) markSiteVisited();
+    }, [isHome]);
 
     // Lift the curtain once the new route has painted. It is already covering
     // the viewport at this point — `navigate()` slid it down before pushing —
