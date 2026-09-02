@@ -1,0 +1,34 @@
+/* ==========================================================================
+   Scroll.
+
+   One rule, and it undoes something in style.css rather than adding anything.
+   Kept in its own file because it is about the whole document, not about any
+   one section, and because it is easy to reintroduce the bug by accident.
+   ========================================================================== */
+
+/* `style.css` sets `html { scroll-behavior: smooth }`, from the static site,
+   where the browser did the smoothing. It is now actively harmful: Lenis moves
+   the page by writing `documentElement.scrollTop` every frame, and per CSSOM
+   that setter obeys `scroll-behavior` — so the browser was animating its way
+   towards each of Lenis's positions instead of taking them, two easings deep.
+
+   Lenis ships a guard for this, but only `.lenis-smooth`, which it applies
+   while one of its own tweens is running. That leaves every write outside a
+   tween unprotected — in particular `scrollTo(0, { immediate: true })`, the
+   jump to the top of a new route behind the transition curtain, which took
+   nearly a second to arrive and was still moving when the curtain lifted.
+
+   `html.lenis` is present the whole time Lenis is mounted, so this covers all
+   of it. Reduced-motion visitors get no Lenis and so keep the browser's own
+   smoothing — style.css already forces it off for them separately.
+
+   `!important` is not decoration here, and removing it silently restores the
+   bug. ScrollTrigger reads `scroll-behavior` once at startup, and if it found
+   "smooth" it takes over the toggling itself, writing the value back onto the
+   element as an INLINE style every time it re-enables scrolling. An inline
+   declaration outranks any stylesheet rule at any specificity, so this is the
+   only weight that can answer it. Lenis's own `.lenis-smooth` guard is written
+   the same way, for the same reason. */
+html.lenis {
+    scroll-behavior: auto !important;
+}

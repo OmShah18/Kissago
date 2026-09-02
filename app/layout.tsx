@@ -6,10 +6,12 @@ import './styles/style.css';
 import './styles/inner-style.css';
 import './styles/kissago.css';
 // New work, kept out of the three sheets above so they stay as ported.
+import './styles/scroll.css';
 import './styles/hero.css';
 import './styles/featured.css';
 import './styles/frames.css';
 import './styles/collections.css';
+import './styles/films.css';
 import './styles/footer.css';
 import 'lenis/dist/lenis.css';
 
@@ -55,7 +57,14 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="en">
+        // The script at the foot of <head> puts `kg-returning` on this element
+        // before React ever runs, so on a return visit the document the client
+        // hydrates against already carries a class the server never wrote. That
+        // is the whole point of it — the class has to land before the first
+        // paint or the preloader flashes — but React sees the two disagree and
+        // warns. Suppression here is shallow: it covers this element's own
+        // attributes and nothing below it.
+        <html lang="en" suppressHydrationWarning>
             <head>
                 <link rel="preconnect" href="https://fonts.googleapis.com" />
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
@@ -64,6 +73,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     is on screen; warming the connection saves a round trip at
                     the moment it is needed. */}
                 <link rel="preconnect" href="https://www.youtube.com" />
+                {/* The films' posters. */}
+                <link rel="preconnect" href="https://i.ytimg.com" />
                 <link href={FONTS_ALL} rel="stylesheet" />
                 <link href={FONTS_TEXT} rel="stylesheet" />
                 <link href={FONT_BOSKA} rel="stylesheet" />

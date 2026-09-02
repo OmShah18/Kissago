@@ -145,8 +145,15 @@
 .kg-hero-media {
     position: sticky;
     top: 0;
+    /* The LARGE viewport, deliberately — not `dvh`. On a phone the address bar
+       retracts on the first scroll, and `dvh` grows with it: the frame would
+       gain the bar's height mid-gesture, under the reader's finger. Sized to
+       the tall state from the start, it never changes; while the bar is still
+       showing the extra sits below the fold, where a sticky top-anchored frame
+       has nothing to reveal anyway. `100vh` is the same value and covers
+       browsers without the newer units. */
     height: 100vh;
-    height: 100dvh;
+    height: 100lvh;
     overflow: hidden;
     background-color: var(--accent-ink);
     /* The opening expansion drives these two numbers rather than the whole
@@ -158,7 +165,11 @@
     --kg-clip-y: 0%;
     --kg-clip-x: 0%;
     clip-path: inset(var(--kg-clip-y) var(--kg-clip-x) var(--kg-clip-y) var(--kg-clip-x));
-    will-change: clip-path;
+    /* Deliberately not promoted from here. This box is the size of the screen
+       and holds four stills and the showreel, so a compositor layer for it is
+       expensive to hold and to re-rasterise — and it was being held for the
+       life of the page for the sake of one 1.25s opening. hero.ts asks for the
+       promotion while that opening runs and hands it back afterwards. */
 }
 
 .kg-hero-scrim {
@@ -187,8 +198,13 @@
 .kg-hero-stage a { pointer-events: auto; }
 
 .kg-hero-headline {
+    /* The SMALL viewport — the counterpart to the frame above. This band is
+       what centres the wordmark, so it has to match the screen as first seen,
+       with the address bar still showing. Holding it there means the word does
+       not slide down the screen as the bar retracts on the first scroll; the
+       band it sits in is the same height throughout. */
     height: 100vh;
-    height: 100dvh;
+    height: 100svh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -245,7 +261,8 @@
 
 .kg-hero-letter > span {
     display: block;
-    will-change: transform;
+    /* Promoted by hero.ts for the entrance and released after it, for the same
+       reason as the frame above. */
 }
 
 /* ---- introduction ---- */

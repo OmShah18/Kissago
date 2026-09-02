@@ -45,6 +45,16 @@ export function PinterestIcon({ size = 18 }: { size?: number }) {
     );
 }
 
+/** Solid, not stroked: at the size the films use it, an outlined triangle
+ *  reads as a stray mark rather than as a control. */
+export function PlayIcon({ size = 18 }: { size?: number }) {
+    return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M8 5.5v13a.6.6 0 0 0 .92.5l10-6.5a.6.6 0 0 0 0-1l-10-6.5a.6.6 0 0 0-.92.5z" />
+        </svg>
+    );
+}
+
 export function ArrowUpIcon({ size = 20 }: { size?: number }) {
     return (
         <svg width={size} height={size} {...stroke} strokeWidth={1.5}>

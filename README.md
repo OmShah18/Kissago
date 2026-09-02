@@ -24,14 +24,14 @@ app/
   styles/              style.css, inner-style.css, kissago.css — unchanged from
                        the static site, and the source of truth for every
                        colour, size and transition on the page.
-                       hero.css, featured.css, frames.css, collections.css and
-                       footer.css are new work, kept separate so those three
-                       cannot drift
+                       scroll.css, hero.css, featured.css, frames.css,
+                       collections.css, films.css and footer.css are new work,
+                       kept separate so those three cannot drift
 components/
   site/                the chrome each route sits inside: transition curtain,
                        header, menu overlay, parallax footer, photograph viewer
   sections/            the repeated page furniture: inner hero, story card,
-                       two-column showcase, closing CTA, enquiry form
+                       films, two-column showcase, closing CTA, enquiry form
 lib/
   gsap.ts              the single place GSAP and ScrollTrigger are registered
   smooth-scroll.ts     Lenis, driven by GSAP's ticker
@@ -80,6 +80,15 @@ out of full-height moments, and at the usual 1.2 with no multiplier they flicked
 past. Touch is deliberately left native: damping a finger drag reads as lag, not
 as polish.
 
+`app/styles/scroll.css` turns off the browser's own `scroll-behavior: smooth`,
+which `style.css` carries over from the static site. Lenis moves the page by
+writing `documentElement.scrollTop` every frame, and that setter obeys
+`scroll-behavior`, so the browser was easing its way towards each position Lenis
+asked for instead of taking it — two easings deep, and a `scrollTo(…,
+{ immediate: true })` took the best part of a second. Read the comment in that
+file before touching the `!important`: ScrollTrigger re-applies the value as an
+inline style, which no ordinary rule can outrank.
+
 ## The home hero
 
 `components/sections/Hero.tsx` is 230vh tall. The footage is `position: sticky`
@@ -106,6 +115,21 @@ The expansion drives `--kg-clip-y` / `--kg-clip-x` rather than a whole
 style in its collapsed two-value form, which leaves GSAP two numbers to
 interpolate against a four-value target — the frame then opens from a corner
 instead of the middle. Custom properties hold exactly what they were given.
+`hero.ts` also owns the `will-change` for both the frame and the letters,
+setting it for the entrance and giving it back on completion: the frame is the
+size of the screen, and promoting it declaratively kept a full-viewport
+compositor layer alive for the whole life of the page.
+
+The two heights in the hero are deliberately different units, and neither is
+`dvh`. On a phone the address bar retracts on the first scroll, and anything
+measured in `dvh` grows by its height mid-gesture — the frame gained ~99px and
+the wordmark slid half that down the screen while the reader's finger was still
+on it. The frame is `100lvh`, sized for the tall state from the outset so it
+never resizes and never uncovers the ground beneath it; the band that centres
+the wordmark is `100svh`, matching the screen as first seen. The section around
+them is `vh`, which is the same as `lvh`. Everything in the hero is therefore a
+constant, and the section does not move while it is being scrolled. On a desktop
+browser all four units are equal, so none of this changes anything there.
 
 ## Featured weddings
 
@@ -144,6 +168,30 @@ ratio — the hover, the scrim and the viewer still come from `.kg-grid`.
 Its selectors name both classes so they beat `.kg-grid`'s own responsive rules
 on specificity rather than on import order. The sampler strips on `/about` and
 `/contact` keep `.kg-grid-4` and are unaffected.
+
+## Films
+
+Three 16:9 frames staggered down the page between the tile wall and the
+showcase. The section above it is a flush three-column grid, so another even
+row here would read as more of the same; the stagger picks up the featured
+weddings' language instead, on the page's own cream ground.
+
+`data/films.ts` holds three real uploads from the studio's channel, each one
+belonging to a wedding that already has a gallery here — so a film opens the
+set it was cut from rather than leading nowhere. Posters are derived from the
+video id, not stored: a still of the film's own first frame is always the right
+image, and there is nothing to keep in step when a film is swapped.
+
+Nothing loads from YouTube until someone asks for it. Each frame is the film's
+poster with a play control over it, and the player replaces it on click —
+three embeds mounted up front would cost more than the rest of the page.
+
+`lib/animations/films.ts` lifts each frame like a curtain as it arrives, its
+poster easing back to size behind it, then drifts the three at alternating
+rates so the column does not travel as one slab. The curtain drives a
+`--kg-film-open` custom property rather than a whole `clip-path`, for the
+reason the hero does: a symmetric `inset()` reports back collapsed and opens
+the frame from a corner.
 
 ## What we shoot
 

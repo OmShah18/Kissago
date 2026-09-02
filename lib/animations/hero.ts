@@ -33,6 +33,13 @@ export function initHeroReveal(): () => void {
     gsap.set(letters, { yPercent: 100 });
     gsap.set(fades, { autoAlpha: 0, y: 26 });
 
+    // Promoted for the entrance only, and handed back below. The frame is the
+    // size of the screen, so leaving it promoted costs a full-viewport layer
+    // for the whole life of the page in exchange for one 1.25s opening — and
+    // the page is scrolled past it within seconds.
+    if (media) gsap.set(media, { willChange: 'clip-path' });
+    gsap.set(letters, { willChange: 'transform' });
+
     // The panel is measured in viewport units, so a resize before the reveal
     // runs would leave it the wrong size.
     const onResize = () => {
@@ -43,7 +50,12 @@ export function initHeroReveal(): () => void {
 
     const unsubscribe = onPreloaderDone(() => {
         started = true;
-        const tl = gsap.timeline();
+        const tl = gsap.timeline({
+            onComplete: () => {
+                if (media) gsap.set(media, { willChange: 'auto' });
+                gsap.set(letters, { willChange: 'auto' });
+            },
+        });
 
         if (media) {
             tl.fromTo(media, panelVars(), {

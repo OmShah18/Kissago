@@ -9,6 +9,7 @@ export const SITE = {
     instagram: 'https://instagram.com/',
     instagramHandle: '@kissago.artco',
     pinterest: 'https://pinterest.com/',
+    youtube: 'https://www.youtube.com/@kissagoweddings',
     whatsapp: 'https://wa.me/',
     city: 'Pune, Maharashtra',
     country: 'India',

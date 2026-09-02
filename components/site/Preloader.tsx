@@ -40,6 +40,14 @@ export function Preloader() {
         // hero at once and never paint the overlay. The stylesheet has kept it
         // hidden since before the first frame, so there is nothing to remove.
         if (!claimFirstVisit() || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            // Deliberately set from the effect rather than worked out while
+            // rendering. Both halves of that condition read things that do not
+            // exist on the server — sessionStorage and matchMedia — so deciding
+            // it any earlier would have the server and the client render
+            // different trees, which is the hydration mismatch this component
+            // is arranged to avoid. The extra render it costs happens once, on
+            // return visits only, and renders nothing.
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setGone(true);
             markPreloaderDone();
             return;

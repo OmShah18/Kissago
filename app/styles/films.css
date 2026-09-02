@@ -1,0 +1,209 @@
+/* ==========================================================================
+   Films.
+
+   Three 16:9 frames staggered down the page rather than lined up in a row.
+   The section it follows is a flush three-column tile wall, so another even
+   grid here would read as more of the same; the stagger picks up the language
+   of the featured weddings instead, on the same cream ground as the rest.
+
+   Everything else — the section padding, the eyebrow, the heading, the button
+   in the head — is the page's own furniture from kissago.css, untouched.
+   ========================================================================== */
+
+.kg-films {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    row-gap: clamp(4rem, 9vw, 9rem);
+    column-gap: 2rem;
+}
+
+/* Each film takes its own row; the columns are what stagger them. Widths
+   differ as well as offsets, so the three read as a sequence rather than as a
+   zigzag of identical blocks. */
+.kg-film:nth-child(1) { grid-column: 1 / 9; }
+.kg-film:nth-child(2) { grid-column: 6 / 13; }
+.kg-film:nth-child(3) { grid-column: 3 / 11; }
+
+/* ---- the frame ---- */
+
+.kg-film-frame {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background-color: var(--accent-ink);
+
+    /* A curtain that lifts as the frame arrives. Driven through a custom
+       property rather than the whole `clip-path`: a symmetric inset() always
+       reports back from computed style in its collapsed form, which leaves
+       GSAP fewer numbers than its target has and opens the frame from a
+       corner. The same reason the hero does it this way. */
+    --kg-film-open: 0%;
+    clip-path: inset(var(--kg-film-open) 0 0 0);
+}
+
+/* The whole poster is the control — a play button floating over a picture is
+   a smaller target than the picture itself. */
+.kg-film-play {
+    display: block;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.kg-film-play img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s var(--ease-out-expo), filter 0.6s var(--ease-out-expo);
+}
+
+.kg-film-play::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(29, 42, 31, 0.42), rgba(29, 42, 31, 0.04) 55%);
+    opacity: 0.85;
+    transition: opacity 0.6s var(--ease-out-expo);
+    pointer-events: none;
+}
+
+.kg-film-play:hover img { transform: scale(1.04); }
+.kg-film-play:hover::after { opacity: 1; }
+
+.kg-film-play-mark {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(3.4rem, 5vw, 4.6rem);
+    height: clamp(3.4rem, 5vw, 4.6rem);
+    border-radius: 50%;
+    /* A dark disc rather than a light one. The posters are the studio's own
+       title cards and several are nearly white, where a cream mark on a cream
+       veil disappears; green holds against both ends. */
+    border: 1px solid rgba(235, 237, 209, 0.5);
+    background-color: rgba(29, 42, 31, 0.44);
+    color: var(--bg);
+    /* Nudged right by a hair: a triangle's optical centre is left of its box. */
+    padding-left: 0.18em;
+    backdrop-filter: blur(3px);
+    transition: background-color 0.5s var(--ease-out-expo),
+                border-color 0.5s var(--ease-out-expo),
+                transform 0.5s var(--ease-out-expo);
+}
+
+.kg-film-play:hover .kg-film-play-mark {
+    background-color: rgba(235, 237, 209, 0.9);
+    border-color: rgba(235, 237, 209, 0.9);
+    color: var(--accent);
+    transform: translate(-50%, -50%) scale(1.06);
+}
+
+.kg-film-play:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+
+.kg-film-player {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* ---- the caption ---- */
+
+.kg-film-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 1.2rem;
+    margin-top: 1.6rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--rule);
+}
+
+.kg-film-index {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: var(--green-warm);
+}
+
+.kg-film-couple {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(1.4rem, 2.3vw, 2.1rem);
+    line-height: 1.1;
+    color: var(--accent);
+    margin: 0;
+    flex: 1 1 auto;
+}
+
+.kg-film-kind {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 400;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--green-warm);
+}
+
+.kg-film-link {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    padding-bottom: 3px;
+    border-bottom: 1px solid var(--rule);
+    transition: border-bottom-color 0.4s var(--ease-out-expo);
+    flex: 0 0 auto;
+}
+
+.kg-film-link:hover { border-bottom-color: var(--accent); }
+
+
+/* --------------------------------------------------------------------------
+   Narrow screens — the stagger needs width, so the frames run full bleed in a
+   plain column, the way the rest of the page stacks.
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+    .kg-films { row-gap: clamp(3rem, 10vw, 5rem); }
+    .kg-film:nth-child(1),
+    .kg-film:nth-child(2),
+    .kg-film:nth-child(3) { grid-column: 1 / -1; }
+
+    .kg-film-meta { margin-top: 1.1rem; padding-top: 0.9rem; gap: 0.35rem 1rem; }
+    .kg-film-couple { flex: 1 1 100%; order: -1; }
+}
+
+/* Touch screens latch :hover on tap, so the zoom meant for a mouse would fire
+   as the player opens and keep running underneath it. */
+@media (hover: none) {
+    .kg-film-play img,
+    .kg-film-play-mark { transition: none; }
+    .kg-film-play:hover img { transform: none; }
+    .kg-film-play:hover .kg-film-play-mark { transform: translate(-50%, -50%); }
+}
+
+
+/* --------------------------------------------------------------------------
+   Reduced motion — the frames are simply open, and nothing drifts.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .kg-film-frame { --kg-film-open: 0% !important; }
+    .kg-film-play img { transition: none; }
+}

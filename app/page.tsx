@@ -2,6 +2,7 @@ import { TransitionLink } from '@/components/site/navigation';
 import { Gallery } from '@/components/site/Gallery';
 import { Hero } from '@/components/sections/Hero';
 import { FeaturedWeddings } from '@/components/sections/FeaturedWeddings';
+import { Films } from '@/components/sections/Films';
 import { Showcase } from '@/components/sections/Showcase';
 import { CtaSection } from '@/components/sections/CtaSection';
 import { portfolioRange } from '@/lib/frames';
@@ -55,6 +56,8 @@ export default function HomePage() {
                 </div>
                 <Gallery className="kg-grid kg-tilegrid" figures={portfolioRange(1, 12)} />
             </section>
+
+            <Films />
 
             <section className="kg-section" style={{ paddingBottom: '4rem' }}>
                 <div className="kg-section-head" style={{ border: 'none', paddingBottom: 0, marginBottom: 0 }}>

@@ -8,6 +8,7 @@ import { initProcessRail } from '@/lib/animations/process-rail';
 import { initHeroReveal, initHeroDrift } from '@/lib/animations/hero';
 import { initBackgroundVideo } from '@/lib/animations/background-video';
 import { initFeatured } from '@/lib/animations/featured';
+import { initFilms } from '@/lib/animations/films';
 
 /**
  * Wires up every scroll-driven animation for the route that is mounted.
@@ -30,6 +31,7 @@ export function PageEffects() {
             initProcessRail();
             disposers.push(initHeroReveal());
             disposers.push(initFeatured());
+            initFilms();
         });
 
         disposers.push(initHeroDrift());
